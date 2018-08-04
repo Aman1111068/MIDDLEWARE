@@ -1,0 +1,2953 @@
+﻿
+using TypeLite;
+using Ecp.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ecp
+{
+    /// <summary>
+    /// Describes the cataloged system result codes 
+    /// </summary>
+    [TsEnum]
+    [CodeCleanup(CodeCleanupTypes.PatternCleanup, Comment = "We need to move the codes to feature code sections like ProfileErrorCodes for the profile related errors.")]
+    public enum CoreCodes
+    {
+        /// <summary>
+        /// Default value for ErrorCode until it is not set
+        /// </summary>
+        [ErrorDetails("Not set", "")]
+        Undefined = 0,
+
+        /// <summary>
+        /// Operation performed successfully, result returned in Data property of response
+        /// </summary>
+        [ErrorDetails("Success", "")]
+        NoError = 1,
+
+        /// <summary>
+        /// Invalid User Name
+        /// </summary>
+        [ErrorDetails("Invalid User Name", "")]
+        Woi24InvalidUserName = -100,
+
+        /// <summary>
+        /// Invalid Address Type
+        /// </summary>
+        [ErrorDetails("Invalid Address Type", "")]
+        Woi24InvalidAddressType = -201,
+
+        /// <summary>
+        /// Invalid Store Number
+        /// </summary>
+        [ErrorDetails("Invalid Store Number", "")]
+        Woi24InvalidStoreNumber = -300,
+
+        /// <summary>
+        /// Store Is Closed
+        /// </summary>
+        [ErrorDetails("Store Is Closed", "")]
+        Woi24StoreIsClosed = -301,
+
+        /// <summary>
+        /// Unknown Day Part
+        /// </summary>
+        [ErrorDetails("Unknown Day Part", "")]
+        Woi24UnknownDaypart = -302,
+
+        /// <summary>
+        /// No Store Returned
+        /// </summary>
+        [ErrorDetails("No Store Returned", "")]
+        Woi24NoStoreReturned = -303,
+
+        /// <summary>
+        /// Invalid Order Number
+        /// </summary>
+        [ErrorDetails("Invalid Order Number", "")]
+        Woi24InvalidOrderNumber = -400,
+
+        /// <summary>
+        /// Invalid Order
+        /// </summary>
+        [ErrorDetails("Invalid Order", "")]
+        Woi24InvalidOrder = -500,
+
+        /// <summary>
+        /// Operation failed because some items are out of stock
+        /// </summary>
+        [ErrorDetails("Item Out of Stock", "")]
+        Woi24ItemOutOfStock = -501,
+
+        /// <summary>
+        /// Item Not Available TOD
+        /// </summary>
+        [ErrorDetails("Item Not Available TOD", "")]
+        Woi24ItemNotAvailableTOD = -502,
+
+        /// <summary>
+        /// Invalid PLU Code
+        /// </summary>
+        [ErrorDetails("Invalid PLU Code", "")]
+        Woi24ProductInvalidPLUCode = -503,
+
+        /// <summary>
+        /// No Delivery Fee Found
+        /// </summary>
+        [ErrorDetails("No Delivery Fee Found", "")]
+        Woi24NoDeliveryFeeFound = -504,
+
+        /// <summary>
+        /// Item Count Is One
+        /// </summary>
+        [ErrorDetails("Item Count Is One", "")]
+        Woi24OrderItemCountIsOne = -505,
+
+        /// <summary>
+        /// Item Not Available By Other Reason
+        /// </summary>
+        [ErrorDetails("Item Not Available By Other Reason", "")]
+        WoiItemNotAvailableByOtherReason = -506,
+
+        /// <summary>
+        /// Invalid Order Value
+        /// </summary>
+        [ErrorDetails("Invalid Order Value", "")]
+        Woi24InvalidOrderValue = -507,
+
+        /// <summary>
+        /// Invalid Order Source
+        /// </summary>
+        [ErrorDetails("Invalid Order Source", "")]
+        Woi24InvalidOrderSource = -508,
+
+        /// <summary>
+        /// No Delivery Charge
+        /// </summary>
+        [ErrorDetails("No Delivery Charge", "")]
+        Woi24NoDCRuleApplies = -509,
+
+        /// <summary>
+        /// Invalid Market FeedbackTypeID
+        /// </summary>
+        [ErrorDetails("Invalid Market FeedbackTypeID", "")]
+        Woi24InvalidMarketId = -510,
+
+        /// <summary>
+        /// Invalid Tender Type Code
+        /// </summary>
+        [ErrorDetails("Invalid Tender Type Code", "")]
+        Woi24InvalidTenderTypeCode = -511,
+
+        /// <summary>
+        /// Invalid Tender Amount
+        /// </summary>
+        [ErrorDetails("Invalid Tender Amount", "")]
+        Woi24InvalidTenderAmount = -512,
+
+        /// <summary>
+        /// Invalid Delivery Time
+        /// </summary>
+        [ErrorDetails("Invalid Delivery Time", "")]
+        Woi24InvalidDeliveryTime = -600,
+
+        /// <summary>
+        /// MDS Error
+        /// </summary>
+        [ErrorDetails("MDS Error", "")]
+        Woi24MDSError = -800,
+
+        /// <summary>
+        /// MDS Unknown Error
+        /// </summary>
+        [ErrorDetails("MDS Unknown Error", "")]
+        Woi24UnknownError = -900,
+
+        /// <summary>
+        /// There was an internal error
+        /// </summary>
+        [ErrorDetails("There was an internal error", "")]
+        CommonGenericError = -1000,
+
+        /// <summary>
+        /// Indicates that the request is considered invalid since it does not match the criteria defined by the specification
+        /// </summary>
+        [ErrorDetails("Indicates that the request is considered invalid since it does not match the criteria defined by the specification", "")]
+        CommonInvalidRequest = -1001,
+
+        /// <summary>
+        /// This error is returned if the application is not registered for the given application
+        /// </summary>
+        [ErrorDetails("This error is returned if the application is not registered for the given application", "")]
+        SecurityApplicationDenied = -1002,
+
+        /// <summary>
+        /// This error is returned if the market is not registered for the given application
+        /// </summary>
+        [ErrorDetails("This error is returned if the market is not registered for the given application", "")]
+        CommonMarketDenied = -1003,
+
+        /// <summary>
+        /// This error is returned when the customer enters a wrong user and/or password
+        /// </summary>
+        [ErrorDetails("This error is returned when the customer enters a wrong user and/or password", "")]
+        CustomerWrongPasswordOrUser = -1004,
+
+        /// <summary>
+        /// This error is returned if the authenticated user does not have permission to access the system
+        /// </summary>
+        [ErrorDetails("This error is returned if the authenticated user does not have permission to access the system", "")]
+        CustomerAccessDenied = -1005,
+
+        /// <summary>
+        /// This error is returned when the customer enters a new password that does not conforms to the Password restrictions rule
+        /// </summary>
+        [ErrorDetails("This error is returned when the customer enters a new password that does not conforms to the Password restrictions rule", "")]
+        CustomerInvalidPassword = -1006,
+
+        /// <summary>
+        /// This error is returned when the customer enters an invalid notification type
+        /// </summary>
+        [ErrorDetails("This error is returned when the customer enters an invalid notification type", "")]
+        CustomerInvalidNotificationType = -1007,
+
+        /// <summary>
+        /// This error is returned when the customer enters an invalid notification type
+        /// </summary>
+        [ErrorDetails("This error is returned when the customer enters an invalid notification type", "")]
+        IvalidNotificationPlatform = -1008,
+
+        /// <summary>
+        /// This error is returned when the customer enters an invalid Mobile Phone Number
+        /// </summary>
+        [ErrorDetails("This error is returned when the customer enters an invalid Mobile Phone Number", "")]
+        CustomerInvalidMobileNumber = -1009,
+
+        /// <summary>
+        /// This error is returned when the customer enters an invalid Email address
+        /// </summary>
+        [ErrorDetails("This error is returned when the customer enters an invalid Email address", "")]
+        CustomerInvalidEmailAddress = -1010,
+
+        /// <summary>
+        /// This error is returned if the customer is not registered in the system
+        /// </summary>
+        [ErrorDetails("This error is returned if the customer is not registered in the system", "")]
+        CustomerUserDoesNotExists = -1011,
+
+        /// <summary>
+        /// This error is returned if the customer must change the password before he/she can log in to the system
+        /// </summary>
+        [ErrorDetails("This error is returned if the customer must change the password before he/she can log in to the system", "")]
+        CustomerCustomerMustChangePassword = -1012,
+
+        /// <summary>
+        /// This error is returned when the given order has not been validated successfully
+        /// </summary>
+        [ErrorDetails("This error is returned when the given order has not been validated successfully", "")]
+        OrderInvalid = -1013,
+
+        ///// <summary>
+        ///// This error is returned if the order has missing choices
+        ///// </summary>
+        //[ErrorDetails("This error is returned if the order has missing choices", "")]
+        //OrderMissingChoices = -1014,
+
+        ///// <summary>
+        ///// This error is returned if the order has invalid customizations
+        ///// </summary>
+        //[ErrorDetails("This error is returned if the order has invalid customizations", "")]
+        //OrderInvalidCustomizations = -1015,
+
+        /// <summary>
+        /// This error is returned if the Barcode cannot be generated
+        /// </summary>
+        [ErrorDetails("This error is returned if the Barcode cannot be generated", "")]
+        OrderBarcodeNotGenerated = -1016,
+
+        /// <summary>
+        /// This error is returned when there is no category to be returned
+        /// </summary>
+        [ErrorDetails("This error is returned when there is no category to be returned", "")]
+        ProductCategoryNotFound = -1017,
+
+        /// <summary>
+        /// This error is returned if the product is not a choice
+        /// </summary>
+        [ErrorDetails("This error is returned if the product is not a choice", "")]
+        ProductIsNotChoice = -1018,
+
+        /// <summary>
+        /// This error is returned if the product has no choice solutions
+        /// </summary>
+        [ErrorDetails("This error is returned if the product has no choice solutions", "")]
+        ProductHasNoChoiceSolutions = -1019,
+
+        /// <summary>
+        /// This error is returned if there is a problem during the process of getting the product details
+        /// </summary>
+        [ErrorDetails("This error is returned if there is a problem during the process of getting the product details", "")]
+        ProductUnableRetrieveDetails = -1021,
+
+        /// <summary>
+        /// This error is returned if the given product has no customization associated
+        /// </summary>
+        [ErrorDetails("This error is returned if the given product has no customization associated", "")]
+        ProductHasNoPossibleCustomizations = -1022,
+
+        /// <summary>
+        /// This error is returned if no product is found for the given filter criteria
+        /// </summary>
+        [ErrorDetails("This error is returned if no product is found for the given filter criteria", "")]
+        ProductNotFound = -1023,
+
+        /// <summary>
+        /// This error is returned if the given product is not a Value Meal
+        /// </summary>
+        [ErrorDetails("This error is returned if the given product is not a Value Meal", "")]
+        ProductIsNotValueMeal = -1024,
+
+        /// <summary>
+        /// This error is returned if the Value Meal has no Components
+        /// </summary>
+        [ErrorDetails("This error is returned if the Value Meal has no Components", "")]
+        ProductValueMealHasNoComponents = -1025,
+
+        /// <summary>
+        /// This error is returned if the product has missing choices
+        /// </summary>
+        [ErrorDetails("This error is returned if the product has missing choices", "")]
+        ProductHasMissingChoices = -1026,
+
+        /// <summary>
+        /// This error is returned if the product has invalid customizations
+        /// </summary>
+        //[ErrorDetails("This error is returned if the product has invalid customizations", "")]
+        //ProductHasInvalidCustomizations = -1027,
+
+        /// <summary>
+        /// This error is returned if no promotions are registered for the market
+        /// </summary>
+        [ErrorDetails("This error is returned if no promotions are registered for the market", "")]
+        ProductNoPromotionsFound = -1028,
+
+        /// <summary>
+        /// This error is returned when there is no restaurant registered for the given Market
+        /// </summary>
+        [ErrorDetails("This error is returned when there is no restaurant registered for the given Market", "")]
+        RestaurantNotRegistered = -1029,
+
+        /// <summary>
+        /// This error is returned when there is no facility registered for the given Market
+        /// </summary>
+        [ErrorDetails("This error is returned when there is no facility registered for the given Market", "")]
+        FacilityNotRegistered = -1087,
+
+        /// <summary>
+        /// This error is returned when there is no language registered with the given Name
+        /// </summary>
+        [ErrorDetails("This error is returned when there is no language registered with the given Name", "")]
+        LanguageNotRegistered = -1030,
+
+        /// <summary>
+        /// This error is returned when the given menuType is not vallid
+        /// </summary>
+        [ErrorDetails("This error is returned when the given menuType is not vallid", "")]
+        MenuTypeNotValid = -1031,
+
+        /// <summary>
+        /// This error is returned when the userName supplied has already been registered
+        /// </summary>
+        [ErrorDetails("User name already exists", "")]
+        CustomerUserNameExists = -1032,
+
+        /// <summary>
+        /// This error is returned when the user supplied has been cancelled
+        /// </summary>
+        [ErrorDetails("The user has been cancelled", "")]
+        CustomerUserIsCancelled = -1033,
+
+        /// <summary>
+        /// This error is returned if the product has invalid components
+        /// </summary>
+        //[ErrorDetails("Product has invalid components", "")]
+        //ProductHasInvalidComponents = -1033,
+
+        /// <summary>
+        /// This error is returned if the product has invalid choices
+        /// </summary>
+        //[ErrorDetails("Product has invalid choices", "")]
+        //ProductHasInvalidChoices = -1034,
+
+        /// <summary>
+        /// This error is returned if the root ViewProduct is invalid
+        /// </summary>
+        [ErrorDetails("Product is invalid", "")]
+        ProductIsInvalid = -1035,
+
+        /// <summary>
+        /// This error is returned if the product is lacking and can not be sold in the store at the time
+        /// </summary>
+        [ErrorDetails("Product is temporarily lacking in the store", "")]
+        ProductIsOutage = -1036,
+
+        /// <summary>
+        /// This error is returned if the application is not registered for the given application
+        /// </summary>
+        [ErrorDetails("This error is returned if the application token for the given application is invalid", "")]
+        SecurityInvalidToken = -1037,
+
+        /// <summary>
+        /// This error is returned if the order is assigned to a store in a market not registered in the system
+        /// </summary>
+        //[ErrorDetails("This error is returned if the order is assigned to a store in a market not registered in the system", "")]
+        //OrderStoreNotRegistered = -1038,
+
+        /// <summary>
+        /// This error is returned when there is no price registered  in the system for an item in the order
+        /// </summary>
+        //[ErrorDetails("This error is returned when there is no price registered  in the system for an item in the order", "")]
+        //ProductItemPriceNotRegistered = -1039,
+
+        /// <summary>
+        /// This error is returned when the tax data of an item in not registered in the system
+        /// </summary>
+        [ErrorDetails("This error is returned when the tax data of an item in not registered in the system", "")]
+        OrderTaxDataItemNotRegistered = -1040,
+
+        /// <summary>
+        /// This error is returned if the customer trying to login is not active
+        /// </summary>
+        //[ErrorDetails("This error is returned if the customer trying to login is not active", "")]
+        //CustomerNotActive = -1041,
+
+        /// <summary>
+        /// This error is returned if the settings does not have a definition for UploadLogFolder
+        /// </summary>
+        [ErrorDetails("Could not read UploadLogFolder in the app.config file", "")]
+        InfraUploadLogFolderConfigNotFound = -1042,
+
+        /// <summary>
+        /// This error is returned if the content of the file is null or empty
+        /// </summary>
+        [ErrorDetails("The content of the file is null or empty", "")]
+        InfraFileInvalidContent = -1043,
+
+        /// <summary>
+        /// This error is returned if the some error occours when trying to create a directory
+        /// </summary>
+        [ErrorDetails("Application could not create the directory", "")]
+        InfraCreateFolderError = -1044,
+
+        /// <summary>
+        /// This error is returned if the some error occours when creating some file.
+        /// </summary>
+        [ErrorDetails("Application could not create the file", "")]
+        InfraCreateFileError = -1045,
+
+        /// <summary>
+        /// This error is returned if the application tries to send sms with a invalid market.
+        /// </summary>
+        [ErrorDetails("Invalid Market to send sms", "")]
+        SMSHelperInvalidMarket = -1046,
+
+        /// <summary>
+        /// This error is returned if the application has not implemented send sms for this market.
+        /// </summary>
+        [ErrorDetails("Invalid Implementation for the Market to send sms", "")]
+        SMSHelperInvalidImplementationMarket = -1047,
+
+        /// <summary>
+        /// This error is returned when the customer enters a nick name that has more than 20 characters
+        /// </summary>
+        [ErrorDetails("Nick name has more than 15 characters", "")]
+        CustomerInvalidNickNameLength = -1048,
+
+        /// <summary>
+        /// This error is returned if the customer is blocked after tries to authentication with wrong password more than maxAuthenticationTries parameters
+        /// </summary>
+        [ErrorDetails("Customer is blocked because tried to authentication unsuccessful many times in sequence", "")]
+        CustomerBlocked = -1049,
+
+        /// <summary>
+        /// This error is returned if the notification trying to send a email to a invalid recipient
+        /// </summary>
+        [ErrorDetails("Notification trying to send a email to a invalid recipient", "")]
+        NotificationInvalidEmailTo = -1050,
+
+        /// <summary>
+        /// This error is returned if the notification trying to send a email from a invalid sender
+        /// </summary>
+        [ErrorDetails("Notification trying to send a email from a invalid sender", "")]
+        NotificationInvalidEmailFrom = -1051,
+
+        ///// <summary>
+        ///// This error is returned if the notification trying to send a email with a invalid subject
+        ///// </summary>
+        //[ErrorDetails("Notification trying to send a email with a invalid subject", "")]
+        //NotificationInvalidSubject = -1052,
+
+        ///// <summary>
+        ///// This error is returned if the notification trying to send a email with a invalid body
+        ///// </summary>
+        //[ErrorDetails("Notification trying to send a email with a invalid body", "")]
+        //NotificationInvalidBody = -1053,
+
+        ///// <summary>
+        ///// This error is returned if the Delivery date and time is invalid, it can be either in the past or in invalid format
+        ///// </summary>
+        //[ErrorDetails("Delivery date and time is invalid, it can be either in the past or in invalid format", "")]
+        //InvalidDeliveryDateTime = -1054,
+
+        ///// <summary>
+        ///// This error is returned if the Time to live is invalid, it can be either an invalid value, too short or too long
+        ///// </summary>
+        //[ErrorDetails("Time to live is invalid, it can be either an invalid value, too short or too long", "")]
+        //InvalidTimeToLive = -1055,
+
+        ///// <summary>
+        ///// This error is returned if the text to be sent is too long
+        ///// </summary>
+        //[ErrorDetails("Text to be sent is too long", "")]
+        //SMSTextTooLong = -1056,
+
+        ///// <summary>
+        ///// This error is returned if the Mobile Phone Number is invalid
+        ///// </summary>
+        //[ErrorDetails("Mobile Phone Number is invalid", "")]
+        //SMSInvalidMobileNumber = -1057,
+
+        ///// <summary>
+        ///// This error is returned if the content is null or empty
+        ///// </summary>
+        //[ErrorDetails("The content is null or empty", "")]
+        //NotificationInvalidContent = -1058,
+
+        ///// <summary>
+        ///// This error is returned if the parameter UploadLogFolder used to configure the directory where the content will be saved is not configured
+        ///// </summary>
+        //[ErrorDetails("The parameter UploadLogFolder used to configure the directory where the content will be saved is not configured.", "")]
+        //NotificationInvalidConfiguration = -1059,
+
+        ///// <summary>
+        ///// This error is returned if the notification try to Invalid directory
+        ///// </summary>
+        //[ErrorDetails("Invalid directory", "")]
+        //NotificationInvalidDirectory = -1060,
+
+        /// <summary>
+        /// This error is returned if the application could not send the message
+        /// </summary>
+        [ErrorDetails("The application could not send the message", "")]
+        NotificationMessageCannotBeSent = -1061,
+
+        /// <summary>
+        /// The application could not send the message because the message template was not found
+        /// </summary>
+        [ErrorDetails("The application could not send the message because the message template was not found", "")]
+        MessageTemplateNotFound = -1062,
+
+        ///// <summary>
+        ///// This error is returned if the application could not read the EmailChangePasswordTemplate File
+        ///// </summary>
+        //[ErrorDetails("The application could not read the EmailChangePasswordTemplate file", "")]
+        //ReadEmailChangePasswordTemplateError = -1062,
+
+        ///// <summary>
+        ///// This error is returned if the application could not read the EmailChangePasswordTemplate configuration
+        ///// </summary>
+        //[ErrorDetails("The application could not read the EmailChangePasswordTemplate configuration", "")]
+        //ChangePasswordTemplateNotFound = -1063,
+
+        ///// <summary>
+        ///// This error is returned if the application could not read the EmailChangePasswordTemplate File
+        ///// </summary>
+        //[ErrorDetails("The application could not read the SMSChangePasswordTemplate file", "")]
+        //ReadSMSChangePasswordTemplateError = -1064,
+
+        ///// <summary>
+        ///// This error is returned if the application could not read the EmailChangePasswordTemplate configuration
+        ///// </summary>
+        //[ErrorDetails("The application could not read the SMSChangePasswordTemplate configuration", "")]
+        //SMSChangePasswordTemplateNotFound = -1065,
+
+        ///// <summary>
+        ///// This error is returned if the application could not read the EmailChangePasswordTemplate File
+        ///// </summary>
+        //[ErrorDetails("The application could not read the EmailRegisterTemplate file", "")]
+        //ReadEmailRegisterTemplateError = -1066,
+
+        ///// <summary>
+        ///// This error is returned if the application could not read the EmailChangePasswordTemplate File
+        ///// </summary>
+        //[ErrorDetails("The application could not read the SMSRegisterTemplate file", "")]
+        //ReadSMSRegisterTemplateError = -1068,
+
+        /// <summary>
+        /// This error is returned if the log file is bigger than the configuration size
+        /// </summary>
+        [ErrorDetails("The log file is bigger than the configuration size", "")]
+        LogFileMaxSizeError = -1069,
+
+        /// <summary>
+        /// This error is returned if the product quantity is bigger than maxQuantityPerItem configuration
+        /// </summary>
+        [ErrorDetails("The product quantity is bigger than maxQuantityPerItem configuration", "")]
+        ProductQuantityError = -1070,
+
+        /// <summary>
+        /// This error is returned if the order has more products that is permited
+        /// </summary>
+        [ErrorDetails("The products are more than permited", "")]
+        OrderProductQuantityError = -1071,
+
+        /// <summary>
+        /// This error is returned if the Message cannot be found
+        /// </summary>
+        [ErrorDetails("Message not found", "")]
+        NotificationMessageNotFound = -1072,
+
+        /// <summary>
+        /// This error is returned if the Message's Delivery Date and Time is invalid
+        /// </summary>
+        [ErrorDetails("Invalid message Delivery Date and Time", "")]
+        NotificationInvalidDeliveryDateTime = -1073,
+
+        /// <summary>
+        /// This error is returned if the Message's Time to Live is invalid
+        /// </summary>
+        [ErrorDetails("Invalid message Time to Live", "")]
+        NotificationInvalidTimeToLive = -1074,
+
+        /// <summary>
+        /// This warning is returned if there are in an order products with differents dayparts
+        /// </summary>
+        [ErrorDetails("The order with different daypart products are not permitted", "")]
+        ProductDayPartNotPermitted = -1075,
+
+        /// <summary>
+        /// This warning is returned when any product of an order is sold in McCafé
+        /// </summary>
+        [ErrorDetails("The order has items that are sold only in McCafé", "")]
+        ProductHasMcCafeItem = -1076,
+
+        /// <summary>
+        /// This error is returned when products in the same order have to be sold in different period of day
+        /// </summary>
+        [ErrorDetails("The order has products with time restrictions that do not coincide", "")]
+        ProductTimeRestrictionDoNotMatch = -1077,
+
+        /// <summary>
+        /// The order has time restriction that can not be validated due to day part inconsistency
+        /// </summary>
+        [ErrorDetails("The order has product with time restriction that do not fit in with the order day part", "")]
+        ProductTimeRestrictionInconsistWithDayPart = -1078,
+
+        /// <summary>
+        /// This error is returned if the content of the file is null or empty
+        /// </summary>
+        [ErrorDetails("The content of the file size exceeded the maximun file size allowed", "")]
+        InfraFileSizeExceeded = -1079,
+
+        /// <summary>
+        /// This warning is returned if the product has time restrictions
+        /// </summary>
+        [ErrorDetails("The product has time restrictions", "")]
+        ProductHasTimeRestrictions = -1080,
+
+        /// <summary>
+        /// This error is returned if the user name is invalid.
+        /// </summary>
+        [ErrorDetails("Invalid user name", "")]
+        CustomerInvalidUserName = -1081,
+
+        /// <summary>
+        /// This error is returned if the application version is invalid.
+        /// </summary>
+        [ErrorDetails("Unauthorized application version", "")]
+        InfraUnauthorizedApplicationVersion = -1082,
+
+        /// <summary>
+        /// This error is returned if the customer tries to change their password to the same password that was used immediately before.
+        /// </summary>
+        [ErrorDetails("Unauthorized reuse of password", "")]
+        CustomerInvalidPasswordReuse = -1083,
+
+        /// <summary>
+        /// This error is returned when products in the same order have to be sold in different period of day
+        /// </summary>
+        [ErrorDetails("The product has time restrictions that do not coincide with previous items in the sale", "")]
+        ProductTimeRestrictionDoNotMatchWPreviousItems = -1084,
+
+        /// <summary>
+        /// This error is returned when the customer inserts the wrong password when changing his password
+        /// </summary>
+        [ErrorDetails("Wrong customer password for password change", "")]
+        CustomerWrongPasswordForPasswordChange = -1085,
+
+        /// <summary>
+        /// This error is returned when it tries to set a product as light but can not be added
+        /// </summary>
+        [ErrorDetails("This product does not accept light modifier", "")]
+        ProductDoesNotAcceptLight = -1086,
+
+        /// <summary>
+        /// This error is returned if the nickname is invalid.
+        /// </summary>
+        [ErrorDetails("Invalid nickname", "")]
+        CustomerInvalidNickName = -1088,
+
+        /// <summary>
+        /// This error is returned if the product is non salable
+        /// </summary>
+        [ErrorDetails("Product is non salable", "")]
+        ProductIsNonSalable = -1089,
+
+        /// <summary>
+        /// This error is returned if the item contains a grill with quantity not permitted.
+        /// </summary>
+        [ErrorDetails("Grill quantity is beyong the limits permitted configured", "")]
+        GrillQtyInvalid = -1090,
+
+        /// <summary>
+        /// This error is returned if the customer tries to log and is not yet an active user.
+        /// </summary>
+        [ErrorDetails("Customer has not been activated", "")]
+        CustomerIsNotActivated = -1091,
+
+        /// <summary>
+        /// This error is returned if the order value is below the lower limit.
+        /// </summary>
+        [ErrorDetails("Order does not reach minimum value", "")]
+        OrderDoesNotReachMinimumValue = -1092,
+
+        /// <summary>
+        /// This error is returned if the delivery charged informed in the order is invalid.
+        /// </summary>
+        [ErrorDetails("Invalid delivery charge", "")]
+        OrderInvalidDeliveryCharge = -1093,
+
+        /// <summary>
+        /// This error is returned if the customer requests the system to resend the activation code but its account is already active.
+        /// </summary>
+        [ErrorDetails("Customer account is already active", "")]
+        CustomerIsActive = -1094,
+
+        /// <summary>
+        /// This error is returned if the customer requests the system to resend the activation code but its account is already active.
+        /// </summary>
+        [ErrorDetails("The orderNumber is not found", "")]
+        OrderNumberIsNotFound = -1095,
+
+        /// <summary>
+        /// This error is returned if the customer has open orders and wants to deregister its account
+        /// </summary>
+        [ErrorDetails("Customer has open Orders", "")]
+        CustomerHasOpenOrders = -1096,
+
+        /// <summary>
+        /// This warning is returned if the product has promotion restrictions
+        /// </summary>
+        [ErrorDetails("The product has promotion restrictions", "")]
+        ProductHasPromotionRestrictions = -1097,
+
+        /// <summary>
+        /// Customer has changed its user name and it is still inactive
+        /// </summary>
+        [ErrorDetails("Customer has changed its user name and it is still inactive", "")]
+        CustomerHasUserNameChanged = -1098,
+
+        /// <summary>
+        /// Customer must accept privacy policy
+        /// </summary>
+        [ErrorDetails("Customer must accept privacy policy", "")]
+        CustomerMustAcceptPrivacyPolicy = -1099,
+
+        /// <summary>
+        /// Customer must accept Terms Of Use.
+        /// </summary>
+        [ErrorDetails("Customer must accept Terms Of Use.", "")]
+        CustomerMustAcceptTermsOfUse = -1100,
+
+        /// <summary>
+        /// This error is returned if no delivery charge rule is found for an order provided.
+        /// </summary>
+        [ErrorDetails("No delivery charge rule applies", "")]
+        OrderNoDeliveryChargeRuleApplies = -1103,
+
+        /// <summary>
+        /// This error is returned if no tender type is found for the operation being executed
+        /// </summary>
+        [ErrorDetails("Invalid Tender Type", "")]
+        InvalidTenderType = -1104,
+
+        /// <summary>
+        /// This error is returned if tender amount is illegal for the operation being executed.
+        /// </summary>
+        [ErrorDetails("Invalid tender amount", "")]
+        InvalidTenderAmount = -1105,
+
+        /// <summary>
+        /// This error is returned when the order sent for storing is empty (Null objects, empty list, no product code, product with zero quantity, etc)
+        /// </summary>
+        [ErrorDetails("Order is empty", "")]
+        OrderIsEmpty = -1107,
+
+        /// <summary>
+        /// This error is returned if the order value is invalid
+        /// </summary>
+        [ErrorDetails("Invalid order value", "")]
+        OrderInvalidOrderValue = -1109,
+
+        /// <summary>
+        /// This error is returned if the order is missing cashless authorization
+        /// </summary>
+        [ErrorDetails("Missing Cashless Authorization", "")]
+        MissingCashlessAuthorization = -1110,
+
+        /// <summary>
+        /// This error is returned if a product has an invalid promo quantity defined
+        /// </summary>
+        [ErrorDetails("Invalid Promo Quantity", "")]
+        OrderInvalidPromoQuantity = -1111,
+
+        /// <summary>
+        /// The store was invalid for the order
+        /// </summary>
+        [ErrorDetails("The application did not found the store in the Order", "")]
+        StoreNotFoundInOrder = -1112,
+
+        /// <summary>
+        /// This error is returned if a timeout occurred during the CheckIn process
+        /// </summary>
+        [ErrorDetails("A timeout occurred during the Check In process", "")]
+        OrderCheckinTimeout = -1113,
+
+        /// <summary>
+        /// This error is returned if a large order is sent to a store that does not accept large orders
+        /// </summary>
+        [ErrorDetails("The store does not accept large orders", "")]
+        StoreDoesNotAcceptLargeOrders = -1114,
+
+        /// <summary>
+        /// This error is returned if the selected store is closed
+        /// </summary>
+        [ErrorDetails("Store is closed", "")]
+        StoreIsClosed = -1121,
+
+        /// <summary>
+        /// This error is returned if the coupon quantity is negativ or higher than the maximum allowed quantity
+        /// </summary>
+        [ErrorDetails("Invalid Coupon Quantity", "")]
+        InvalidCouponQuantity = -1122,
+
+        /// <summary>
+        /// This error is returned if the coupon quantity is negativ or higher than the maximum allowed quantity
+        /// </summary>
+        [ErrorDetails("Invalid Customer Origin or Invalid Order Source", "")]
+        InvalidExternalChannel = -1123,
+
+        /// <summary>
+        /// This error is returned when the conffigured delivery charge is not found in the store
+        /// </summary>
+        [ErrorDetails("This error is returned when the configured delivery charge is not found in the store", "")]
+        DCFromDBIsNotInTheStore = -1124,
+
+        /// <summary>
+        /// This error is returned when the product or one of its child has no configured price in db
+        /// </summary>
+        [ErrorDetails("This error is returned when the product or one of its child has no configured price in db", "")]
+        NoPriceConfiguredForProductOrChild = -1125,
+
+        /// <summary>
+        /// This error is returned if the selected store area is closed
+        /// </summary>
+        [ErrorDetails("Store area is closed", "")]
+        StoreAreaIsClosed = -1126,
+
+        /// <summary>
+        /// This error is returned if the specified store area is invalid
+        /// </summary>
+        [ErrorDetails("Store area is invalid", "")]
+        StoreAreaIsInvalid = -1127,
+
+        /// <summary>
+        /// Invalid cryptographic algorithm
+        /// </summary>
+        [ErrorDetails("Invalid cryptographic algorithm", "")]
+        InvalidCryptoAlgorithm = -1128,
+
+        /// <summary>
+        /// Invalid cryptographic key
+        /// </summary>
+        [ErrorDetails("Invalid cryptographic key", "")]
+        InvalidCryptoKey = -1129,
+
+        /// <summary>
+        /// /// This error is returned if the POD is invalid
+        /// </summary>
+        [ErrorDetails("POD is invalid", "")]
+        UnknownPOD = -1130,
+
+        /// <summary>
+        /// This error is returned when an Address is Invalid.
+        /// </summary>
+        [ErrorDetails("Invalid Address", "")]
+        InvalidAddress = -1200,
+
+        /// <summary>
+        /// This error is returned when an Address Type is Invalid.
+        /// </summary>
+        [ErrorDetails("Invalid Address Type", "")]
+        InvalidAddressType = -1201,
+
+        /// <summary>
+        /// This error is returned when an operation was attempted which would leave the customer without a default address.
+        /// </summary>
+        [ErrorDetails("A violation of the default address policy was attempted", "")]
+        AddressDefaultViolation = -1203,
+
+        /// <summary>
+        /// This error is returned if there's no address for the customer with the provided address type
+        /// </summary>
+        [ErrorDetails("AddressType does not exist for the customer", "")]
+        AddressTypeNotExists = -1204,
+
+        /// <summary>
+        /// This error is returned if an address type exists for a customer and an attempt to add it again 2s made.
+        /// </summary>
+        [ErrorDetails("Address Type already registered", "")]
+        AddressExistsViolation = -1205,
+
+        /// <summary>
+        /// This error is returned the order source was not informed when totalized was called or has an invalid value.
+        /// </summary>
+        [ErrorDetails("Order source not informed or invalid", "")]
+        OrderSrcNotInformedOrInvalid = -1206,
+
+        /// <summary>
+        /// This error is returned when the Favorite Data is Invalid.
+        /// </summary>
+        [ErrorDetails("Invalid Favorite Data", "")]
+        InvalidFavorite = -1210,
+
+        /// <summary>
+        /// This error is returned when the Favorite Type is Invalid.
+        /// </summary>
+        [ErrorDetails("Invalid Favorite Type", "")]
+        InvalidFavoriteType = -1211,
+
+        /// <summary>
+        /// This error is returned when the Favorite Name is over size.
+        /// </summary>
+        [ErrorDetails("Invalid Favorite Name", "")]
+        InvalidFavoriteName = -1212,
+
+        /// <summary>
+        /// This error is returned if the favorite Data exists for a customer and an attempt to add it again 2s made.
+        /// </summary>
+        [ErrorDetails("Favorite Name already registered", "")]
+        FavoriteExistsViolation = -1213,
+
+        /// <summary>
+        /// This error is returned if the favorite data does not exist for a customer to be updated
+        /// </summary>
+        [ErrorDetails("Favorite had not been registered", "")]
+        FavoriteDoesNotExistsViolation = -1214,
+
+        /// <summary>
+        /// This error is returned if the customer tries to include a new favorite but there is no vacancy
+        /// </summary>
+        [ErrorDetails("Number of Favorite Elements exceeded the maximum permitted", "")]
+        FavoriteMaxElementsError = -1215,
+
+        /// <summary>
+        /// This error is returned when the Location Data is Invalid.
+        /// </summary>
+        [ErrorDetails("Invalid Location Data", "")]
+        InvalidLocation = -1216,
+
+        /// <summary>
+        /// This error is returned when an Favorite Name is over size.
+        /// </summary>
+        [ErrorDetails("Invalid Location Name", "")]
+        InvalidLocationName = -1217,
+
+        /// <summary>
+        /// This error is returned if the Location Data exists for a customer and an attempt to add it again 2s made.
+        /// </summary>
+        [ErrorDetails("Location already registered", "")]
+        LocationNameExistsViolation = -1218,
+
+        /// <summary>
+        /// This error is returned if the Location data does not exist for a customer to be updated
+        /// </summary>
+        [ErrorDetails("Location had not been registered", "")]
+        LocationDoesNotExistsViolation = -1219,
+
+        /// <summary>
+        /// This error is returned if the customer tries to include a new Location but there is no vacancy
+        /// </summary>
+        [ErrorDetails("Number of Locations exceeded the maximum permitted", "")]
+        LocationMaxElementsError = -1220,
+
+        /// <summary>
+        /// This error is returned if the customer has been cancelled or is not valid
+        /// </summary>
+        [ErrorDetails("This error is returned if is not possible to activate the customer", "")]
+        CustomerActivationNotPossible = -1221,
+
+        /// <summary>
+        /// This error is returned when the Recent Order Data is Invalid.
+        /// </summary>
+        [ErrorDetails("Invalid Recent Order Data", "")]
+        InvalidRecentOrder = -1222,
+
+        /// <summary>
+        /// This error is returned when the Recent Order Name is over size.
+        /// </summary>
+        [ErrorDetails("Invalid Recent Order Name", "")]
+        InvalidRecentOrderName = -1223,
+
+        /// <summary>
+        /// This error is returned if the phone number for the address is invalid.
+        /// </summary>
+        [ErrorDetails("The phone number given for the address is invalid", "")]
+        AddressInvalidPhoneNumber = -1299,
+
+        /// <summary>
+        /// This error is returned if an invalid Store Number is informed
+        /// </summary>
+        [ErrorDetails("Invalid Store Number", "")]
+        InvalidStoreNumber = -1300,
+
+        /// <summary>
+        /// This exceptional scenario happens when FOE/NP returns a daypart different from known time-ofdays in MDS 2. In this case, appropriate menu selection is impossible.
+        /// </summary>
+        [ErrorDetails("Unknowns daypart in store", "")]
+        UnknownDaypart = -1302,
+
+        /// <summary>
+        /// This error is returned if a search for restaurants didn't find any with provived criteria
+        /// </summary>
+        [ErrorDetails("No restaurant was found for the given criteria", "")]
+        RestaurantNotFound = -1303,
+
+        /// <summary>
+        /// This error is returned when a blacklisted customer tries to log in.
+        /// </summary>
+        [ErrorDetails("Customer is blacklisted", "")]
+        CustomerIsBlacklisted = -1304,
+
+        /// <summary>
+        /// This exceptional scenario happens when GetDeliveryStore or GetStoreInfo called
+        /// for a store which already has the maximum number of advance order allowed within 
+        /// the requested delivery time running. MDS will not accept the order when the 
+        /// advance order limit exceeded.
+        /// </summary>
+        [ErrorDetails("Advance order limit of the store breached", "")]
+        AdvanceOrderLimitExceeded = -1305,
+
+        /// <summary>
+        /// This error is returned if error occur setting special message to a restaurant
+        /// </summary>
+        [ErrorDetails("Generic error setting special message for a restaurant", "")]
+        RestaurantSpecialMessageGenericError = -1306,
+
+        /// <summary>
+        /// This error is returned if an invalid Delivery Time is informed
+        /// </summary>
+        [ErrorDetails("Invalid Delivery Time", "")]
+        InvalidDeliveryTime = -1600,
+
+        /// <summary>
+        /// This error is returned if an invalid product quantity per order
+        /// </summary>
+        [ErrorDetails("Invalid product quantity per order", "")]
+        InvalidProductQuantityPerOrder = -1601,
+
+        /// <summary>
+        /// This error is returned if a temporary order doesn't exist with the given temp id.
+        /// </summary>
+        [ErrorDetails("Temporary order doesn't exist", "")]
+        TemporaryOrderDoesntExist = -1602,
+
+        /// <summary>
+        /// This error is returned if payment resolution for a particular temporary order is called more than once and with different resolution value.
+        /// </summary>
+        [ErrorDetails("Temporary order's payment is already resolved with a different resolution", "")]
+        DifferentPaymentResolution = -1603,
+
+        /// <summary>
+        /// This error is returned if a cashless temporary order is given for ConfirmOrder as input.
+        /// </summary>
+        [ErrorDetails("Temporary order is cashless, SetCashlessPaymentResolution should be used", "")]
+        TemporaryOrderIsCashless = -1604,
+
+        /// <summary>
+        /// This error is returned if a not cashless temporary order is given for SetCashlessPaymentResolution as input.
+        /// </summary>
+        [ErrorDetails("Temporary order is not cashless, ConfirmOrder should be used", "")]
+        TemporaryOrderIsNotCashless = -1605,
+
+        /// <summary>
+        /// This error is returned when the Order Total Value less than or equal to zero.
+        /// </summary>
+        [ErrorDetails("The totalized order has a total value less than or equal to zero", "")]
+        NegativeOrderValue = -1606,
+
+        /// <summary>
+        /// This error is returned if the order value is over the upper limit of selected tender type.
+        /// </summary>
+        [ErrorDetails("Order is over tender type's maximum order value", "")]
+        TenderTypeMaximumOrderValue = -1607,
+
+        /// <summary>
+        /// This error is returned if the order value is below the lower limit of selected tender type.
+        /// </summary>
+        [ErrorDetails("Order does not reach tender type's minimum order value", "")]
+        TenderTypeMinimumOrderValue = -1608,
+
+        /// <summary>
+        /// This warning is returned if deliver early was selected for Take-Out.
+        /// </summary>
+        [ErrorDetails("Deliver Early Option removed", "")]
+        DeliverEarlyOptionRemoved = -1609,
+
+        /// <summary>
+        /// This warning is returned if deliver later was selected for Take-Out.
+        /// </summary>
+        [ErrorDetails("Deliver Later Option removed", "")]
+        DeliverLaterOptionRemoved = -1610,
+
+        /// <summary>
+        /// This error is returned if DeliverEarlyQuantity is greater than zero and the IsDeliverEarlyEnabled is false for the product.
+        /// </summary>
+        [ErrorDetails("Deliver Early Option is disabled for the product", "")]
+        DeliverEarlyOptionIsNotEnabled = -1611,
+
+        /// <summary>
+        /// This is a large order.
+        /// </summary>
+        [ErrorDetails("Large order notification", "")]
+        LargeOrderNotification = -1612,
+
+        /// <summary>
+        /// This is a large order which needs CC confirmation.
+        /// </summary>
+        [ErrorDetails("Large order alert with call center confirmation needed", "")]
+        LargeOrderAlert = -1613,
+
+        /// <summary>
+        /// This is a large order with an order value greater than the LO max threshold.
+        /// </summary>
+        [ErrorDetails("Large order maximum threshold rejection", "")]
+        LargeOrderRejection = -1614,
+
+        /// <summary>
+         /// /// This error is returned if FoeIntegrationService timeouts while sending order to FOE
+        /// Comes from legacy StoreGatewayOrderError
+        /// </summary>
+        [ErrorDetails("FoeIntegrationService timeout while sending order to FOE", "")]
+        OrderSendTimeOut = -1615,
+
+        /// <summary>
+        /// NewPOS is unreachable while FoeIntegrationService is sending the order
+        /// Comes from legacy StoreGatewayOrderError
+        /// </summary>
+        [ErrorDetails("NewPOS is unreachable while FoeIntegrationService is sending the order", "")]
+        OrderSendPosDown = -1616,
+
+        /// <summary>
+        /// Exception while FoeIntegrationService is sending the order
+        /// Comes from legacy StoreGatewayOrderError
+        /// </summary>
+        [ErrorDetails("Exception while FoeIntegrationService is sending the order", "")]
+        OrderSendException = -1617,
+
+        /// <summary>
+        /// This error is returned whenever the system is trying to send an order to FOE that sending is already in progress
+        /// </summary>
+        [ErrorDetails("This error is returned whenever the system is trying to send an order to FOE that sending is already in progress", "")]
+        SendOrderToFoeAlreadyInProgress = -1618,
+
+        /// <summary>
+        /// This error is returned whenever the system is trying to send an order to FOE that is already sent
+        /// </summary>
+        [ErrorDetails("This error is returned whenever the system is trying to send an order to FOE that is already sent", "")]
+        OrderAlreadySentToFoe = -1619,
+
+        /// <summary>
+        /// This error is returned whenever the system is trying to send an order to FOE that is already sent
+        /// </summary>
+        [ErrorDetails("This error is returned whenever getting the next DisplayOrderID fails", "")]
+        DisplayOrderIDCreationError = -1620,
+
+        [ErrorDetails("This error is returned whenever the count of orders returned by Foundational CheckIn SearchOrder filter is more than the Market Parameter MaxSearchOrdersByRestaurant", "")]
+        MaxSearchOrdersByRestaurantExceeded = -1621,
+
+        [ErrorDetails("This error is returned whenever the requested order is already finalized (Foundation CheckIn", "")]
+        OrderAlreadyFinalized = -1622,
+
+        [ErrorDetails("This error is returned whenever the requested order is already paid to a restaurant which is different to the requested one (Foundation CheckIn", "")]
+        OrderPaidToAnotherRestaurant = -1623,
+
+        [ErrorDetails("This error is returned whenever the CheckInCode part contained by search order request is too short (at lease 4 characters expected) (Foundation CheckIn", "")]
+        CheckInCodePartIsTooShort = -1624,
+
+        [ErrorDetails("This error is returned whenever the CheckInCode does not exists (Foundational CheckIn)", "")]
+        CheckInCodeDoesNotExists = -1625,
+
+        [ErrorDetails("This error is returned whenewer the orderId does not exists", "")]
+        OrderIdDoesNotExists = -1626,
+
+        /// <summary>
+        /// The configuration for the distributed lock is invalid
+        /// </summary>
+        [ErrorDetails("The configuration for the distributed lock is invalid", "")]
+        InvalidDistributedLockConfiguration = -1700,
+
+        /// <summary>
+        /// The configuration for the distributed lock is missing
+        /// </summary>
+        [ErrorDetails("The configuration for the distributed lock is missing", "")]
+        MissingDistributedLockConfiguration = -1701,
+
+        /// <summary>
+        /// Market Configuration is missing
+        /// </summary>
+        [ErrorDetails("Market Configuration is missing", "")]
+        MarketConfigIsNull = -1800,
+
+        /// <summary>
+        /// The configuration for the distributed lock is missing
+        /// </summary>
+        [ErrorDetails("Notification templates are missing", "")]
+        MarketNotificationTemplatesIsNullOrEmpty = -1801,
+
+        /// <summary>
+        /// The configuration for the distributed lock is missing
+        /// </summary>
+        [ErrorDetails("The configuration for the distributed lock is missing", "")]
+        NotificationTemplateFileNotFound = -1802,
+
+        /// <summary>
+        /// The configuration for the distributed lock is missing
+        /// </summary>
+        [ErrorDetails("The configuration for the distributed lock is missing", "")]
+        NotificationSubjectResourceNotFound = -1803,
+
+        [ErrorDetails("In Cassandra no split factor found for the current period while trying to log", "")]
+        NoSplitFactorFound = -1804,
+
+        [ErrorDetails("Notification Service could not retrieved related Offer record.", "")]
+        NotificationOfferNotFound = -1805,
+
+        [ErrorDetails("File is not valid as a sale file", "")]
+        InvalidSaleFile = -1806,
+
+        [ErrorDetails("Integration services couldn't generate the minimum random codes at startup", "")]
+        RandomCodeGenerationError = -1807,
+
+        [ErrorDetails("There is no Sale File available in eCP", "")]
+        NoSaleFileToDownload = -1808,
+
+        [ErrorDetails("This error is returned whenever the order is already paid to a different restaurant or finalized.", "")]
+        OrderAlreadyPaidOrFinalized = -1809,
+
+        #region Customer Service -2000 - -2999
+
+        /// <summary>
+        /// This error is returned if gender is filled on a market where it is not defined.
+        /// </summary>
+        [ErrorDetails("Gender is not allowed in current market", "")]
+        CustomerGenderIsNotAllowedOnMarket = -2000,
+
+        /// <summary>
+        /// This error is returned if ethnicity is filled on a market where it is not defined.
+        /// </summary>
+        [ErrorDetails("Ethnicity is not allowed in current market", "")]
+        CustomerEthnicityIsNotAllowedOnMarket = -2001,
+
+        /// <summary>
+        /// This error is returned if gender is filled on a market where it is not defined.
+        /// </summary>
+        [ErrorDetails("Invalid gender", "")]
+        CustomerInvalidGender = -2003,
+
+        /// <summary>
+        /// This error is returned if ethnicity is filled on a market where it is not defined.
+        /// </summary>
+        [ErrorDetails("Invalid ethnicity", "")]
+        CustomerInvalidEthnicity = -2004,
+
+        /// <summary>
+        /// This error is returned if the specified market area (ZIPCode) is not available for mobile ordering
+        /// </summary>
+        [ErrorDetails("Market area (based on ZIPCode) is not available for mobile ordering", "")]
+        MarketAreaNotAvailable = -2005,
+
+        /// <summary>
+        /// The given zip code is not valid
+        /// </summary>
+        [ErrorDetails("The given zip code is not valid", "")]
+        CustomerInvalidZipCode = -2005,
+
+        /// <summary>
+        /// This error is returned if the given feedback rating is invalid on the market
+        /// </summary>
+        [ErrorDetails("Invalid feedback rating", "")]
+        CustomerInvalidFeedbackRating = -2006,
+
+        /// <summary>
+        /// This error is returned if the given customer login information is invalid
+        /// </summary>
+        [ErrorDetails("Invalid customer login information", "")]
+        InvalidCustomerLoginInfo = -2100,
+
+        /// <summary>
+        /// This error is returned if the given customer login type is invalid
+        /// </summary>
+        [ErrorDetails("Invalid login type in the login information", "")]
+        InvalidLoginType = -2101,
+
+        /// <summary>
+        /// This error is returned if the given social network id is invalid
+        /// </summary>
+        [ErrorDetails("Invalid social network ID", "")]
+        InvalidSocialNetworkID = -2102,
+
+        /// <summary>
+        /// This error is returned if the internal id given during social login is invalid
+        /// </summary>
+        [ErrorDetails("Invalid internal ID for the social network login", "")]
+        InvalidSocialNetworkInternalID = -2103,
+
+        /// <summary>
+        /// This error is returned if the access token given during social login is invalid
+        /// </summary>
+        [ErrorDetails("Invalid access token for the social network login", "")]
+        InvalidSocialNetworkAccessToken = -2104,
+
+        /// <summary>
+        /// This error is returned if the social login failed for the customer
+        /// </summary>
+        [ErrorDetails("Social network login failed for the customer on MobileGateway side, because 3pty sociallogin server returned with on error callback", "")]
+        CustomerSocialLoginFailed = -2105,
+
+        /// <summary>
+        /// This error is returned if the given social login already exists
+        /// </summary>
+        [ErrorDetails("Customer social network login already exists", "")]
+        CustomerSocialLoginAlreadyExists = -2106,
+
+        /// <summary>
+        /// This error is returned if the social network configuration is invalid for the market
+        /// </summary>
+        [ErrorDetails("Social network configuration error - either the profile URI or the id key is configured incorrectly", "")]
+        SocialNetworkConfigurationError = -2107,
+
+        /// <summary>
+        /// This error is returned if the given customer login type cannot be removed
+        /// </summary>
+        [ErrorDetails("Unremovable customer login type", "")]
+        CustomerLoginTypeCannotBeRemoved = -2108,
+
+        /// <summary>
+        /// This error is returned if the given social login does not exist for the customer
+        /// </summary>
+        [ErrorDetails("The given social login doesn't exist for the customer", "")]
+        CustomerSocialLoginDoesntExist = -2109,
+
+        /// <summary>
+        /// This error is returned if the customer is not allowed to change social login password
+        /// </summary>
+        [ErrorDetails("Social login customer are not allowed to change password", "")]
+        CustomerSocialChangePasswordNotAllowed = -2110,
+
+         /// <summary>
+        /// This error is returned if customer cannot be identified exactly
+        /// </summary>
+        [ErrorDetails("Multiple customers found, system can't decide the exact customer", "")]
+        CustomerCannotBeIdentified = -2111,
+
+        /// <summary>
+        /// This error is returned if values of required customer profile fields are invalid or missing
+        /// </summary>
+        [ErrorDetails("Customer has required profile fields missing", "")]
+        CustomerRequiredProfileFieldsMissingOrInvalid = -2112,
+
+        /// <summary>
+        /// This error is returned if the given activation link has been expired
+        /// </summary>
+        [ErrorDetails("The given activation link has been expired", "")]
+        ExpiredActivationLink = -2113,
+
+        /// <summary>
+        /// This error is returned if the given validation link has been expired
+        /// </summary>
+        [ErrorDetails("The given validation link has been expired", "")]
+        ExpiredValidationLink = -2114,
+
+        /// <summary>
+        /// This error is returned if the given activation code has been expired
+        /// </summary>
+        [ErrorDetails("The given activation code has been expired", "")]
+        ExpiredActivationCode = -2115,
+
+        /// <summary>
+        /// This error is returned if the given validation code has been expired
+        /// </summary>
+        [ErrorDetails("The given validation code has been expired", "")]
+        ExpiredValidationCode = -2116,
+
+        /// <summary>
+        /// This error is returned if the given login preference is not supported on the market
+        /// </summary>
+        [ErrorDetails("The given login preference is not supported by the market based on market settings.", "")]
+        CustomerLoginPreferenceInvalid = -2117,
+
+        /// <summary>
+        /// This error is returned if the given feedback type is invalid on the market.
+        /// </summary>
+        /// 3.0.1 - SQE-48: We changed the Error Code because the legacy mobile app is using the -2005 code to validate the zipcode
+        [ErrorDetails("Invalid feedback type", "")]
+        CustomerInvalidFeedbackType = -2118,
+
+        /// <summary>
+        /// The given social login is not registered in the system.
+        /// </summary>
+        [ErrorDetails("The given social login is not registered in the system.", "")]
+        CustomerSocialLoginIsNotRegistered = -2119,
+
+        /// <summary>
+        /// The given social login phone number is already registered and validated in the system.
+        /// </summary>
+        [ErrorDetails("The given social login phone number is already registered and validated in the system.", "")]
+        CustomerSocialLoginPhoneIsAlreadyVerified = -2120,
+
+        /// <summary>
+        /// The given login has been successfully taken over by another customer and cannot be activated anymore
+        /// </summary>
+        [ErrorDetails("The given login has been successfully taken over by another customer and cannot be activated anymore.", "")]
+        CustomerLoginTakenOver = -2200,
+
+        /// <summary>
+        /// The email address has already been verified by the customer
+        /// </summary>
+        [ErrorDetails("The email address has already been verified by the customer.", "")]
+        EmailAddressAlreadyVerified = -2201,
+
+        /// <summary>
+        /// The email address is already in use by another customer
+        /// </summary>
+        [ErrorDetails("The email address is already in use by another customer.", "")]
+        EmailAddressAlreadyInUse = -2202,
+
+        /// <summary>
+        /// The default phone number has already been verified by the customer
+        /// </summary>
+        [ErrorDetails("The default phone number has already been verified by the customer.", "")]
+        DefaultPhoneAlreadyVerified = -2203,
+
+        /// <summary>
+        /// The default phone number is already in use by another customer
+        /// </summary>
+        [ErrorDetails("The default phone number is already in use by another customer.", "")]
+        DefaultPhoneAlreadyInUse = -2204,
+
+        /// <summary>
+        /// The verification code sent by the customer for login mode verification is invalid
+        /// </summary>
+        [ErrorDetails("The verification code sent by the customer for login mode verification is invalid.", "")]
+        InvalidVerificationCode = -2205,
+
+        /// <summary>
+        /// First name was not provided for phone login preference
+        /// </summary>
+        [ErrorDetails("First name or last name was not provided for phone login preference.", "")]
+        MandatoryLoginArgumentsMissing = -2206,
+
+        /// <summary>
+        /// The customer's email has been taken over by another customer by successful verification
+        /// </summary>
+        [ErrorDetails("The customer's email has been taken over by another customer by successful verification.", "")]
+        CustomerEmailTakenOver = -2207,
+
+        /// <summary>
+        /// The customer's default phone has been taken over by another customer by successful verification
+        /// </summary>
+        [ErrorDetails("The customer's default phone has been taken over by another customer by successful verification.", "")]
+        CustomerPhoneTakenOver = -2208,
+
+        /// <summary>
+        /// The customer's default phone number is invalid
+        /// </summary>
+        [ErrorDetails("The customer's default phone number is invalid.", "")]
+        CustomerInvalidDefaultPhone = -2209,
+
+        /// <summary>
+        /// E-mail address parameter is missing or invalid
+        /// </summary>
+        [ErrorDetails("E-mail address parameter is missing or invalid.", "")]
+        CustomerMissingEmailToResetPassword = -2210,
+        
+        /// <summary>
+        /// Phone number and email address parameters are missing or invalid
+        /// </summary>
+        [ErrorDetails("Phone number and email address parameters are missing or invalid.", "")]
+        CustomerMissingPhoneAndEmailToResetPassword = -2211,
+
+        [ErrorDetails("Guest customer users nor allowed", "")]
+        GuestCustomerNotAllowed = -2212,
+
+        [ErrorDetails("The customer's phone status is unverified.", "")]
+        CustomerPhoneIsNotVerified = -2213,
+
+        [ErrorDetails("Unique code filter cannot be updated because the previous update process is still running", "")]
+        UniqueCodeFilterUpdateIsAlreadyRunning = -2211,
+
+        /// <summary>
+        /// This error codes is obsolete, -2105 code is returned instead by MobileGateway the same way as 2.7.x
+        /// Social network login failed for the customer on MobileGateway side, because 3pty sociallogin server returned an InternalID different from the one provided by us
+        /// </summary>
+        //[ErrorDetails("Social network login failed for the customer on MobileGateway side, because 3pty sociallogin server returned an InternalID different from the one provided by us", "")]
+        //CustomerSocialLoginFailedInternalIdMismatch = -2214,
+
+        /// <summary>
+        /// Social network login failed for the customer on MobileGateway side, provided internalID is empty
+        /// </summary>
+        [ErrorDetails("Social network login failed for the customer on MobileGateway side, provided internalID is empty", "")]
+        CustomerSocialLoginFailedInternalIdEmpty = -2215,
+
+        /// <summary>
+        /// Social network login failed for the customer on UserAuthenticationService side, because failed to get authentication info for internalId
+        /// </summary>
+        [ErrorDetails("Social network login failed for the customer on UserAuthenticationService side, because failed to get authentication info for internalId", "")]
+        CustomerSocialLoginFailedNoAuthDataForInternalId = -2216,
+
+        /// <summary>
+        /// Social network login failed for the customer on UserAuthenticationService side, because failed to get authentication info for username
+        /// </summary>
+        [ErrorDetails("Social network login failed for the customer on UserAuthenticationService side, because failed to get authentication info for username", "")]
+        CustomerSocialLoginFailedNoAuthDataForUserName = -2217,
+
+        /// <summary>
+        /// Social network login failed for the customer on UserAuthenticationService side, because failed to get authentication info for username
+        /// </summary>
+        [ErrorDetails("Invalid customer type, during the email offer association", "")]
+        InvalidCustomerType = -2218,
+        #endregion
+
+        #region Product Service -3000 to 3999
+        [ErrorDetails("Product during update not found in cache.", "")]
+        ProductNotFoundInCache = -3000,
+        #endregion
+
+        #region Address Provider -4000 to -4999
+        /// <summary>
+        /// This error is returned if the AddressElementTypeCode is invalid.
+        /// </summary>
+        [ErrorDetails("Invalid AddressElementTypeCode", "")]
+        APInvalidAddressElementTypeCode = -4000,
+
+        /// <summary>
+        /// This error is returned if the AliasTypeCode is invalid.
+        /// </summary>
+        [ErrorDetails("Invalid AliasTypeCode", "")]
+        APInvalidAliasTypeCode = -4001,
+
+        /// <summary>
+        /// This error is returned if on of the AddressElement is mandatory but not presented.
+        /// </summary>
+        [ErrorDetails("AddressElement is mandatory", "")]
+        APAdressElementIsMandatory = -4002,
+
+        /// <summary>
+        /// This error is returned if on of the AddressElement is mandatory but not presented.
+        /// </summary>
+        [ErrorDetails("AddressElement is conditionally mandatory", "")]
+        APAdressElementIsConditionallyMandatory = -4003,
+
+        /// <summary>
+        /// This error is returned if the currently used market is not supported by the Address Provider (-4004)
+        /// </summary>
+        [ErrorDetails("Market is not supported by AddressProvider", "")]
+        APMarketNotSupported = -4004,
+
+        /// <summary>
+        /// This error is returned if the specified address exists but there is no store delivering to that grid (-4005)
+        /// </summary>
+        [ErrorDetails("Address out of bounds", "")]
+        APAddressOutOfBounds = -4005,
+
+        /// <summary>
+        /// This error is returned if the specified address is invalid (-4006)
+        /// </summary>
+        [ErrorDetails("Invalid address", "")]
+        APInvalidAddress = -4006,
+
+        /// <summary>
+        /// This error is returned if the additional parameters should be exists but it's invalid or missing.
+        /// </summary>
+        [ErrorDetails("Some option parameter is missing or invalid", "")]
+        APInvalidAddressOption = -4007,
+
+        [ErrorDetails("An error occurred while trying to obtain a registration URL token from an external address provider", "")]
+        APAddressRegistrationTokenError = -4008,
+
+        [ErrorDetails("An error occurred while trying to register the customer's address", "")]
+        APAddressRegistrationError = -4009,
+
+        [ErrorDetails("Address registration cancelled by the customer", "")]
+        APAddressRegistrationCancellation = -4010,
+
+        [ErrorDetails("An error occurred while trying to obtain a address hub URL token from an external address provider", "")]
+        APAddressHubTokenError = -4011,
+
+        [ErrorDetails("An error occurred while trying to select the customer's address", "")]
+        APAddressSelectionError = -4012,
+
+        [ErrorDetails("Address selection cancelled by the customer", "")]
+        APAddressSelectionCancellation = -4013,
+
+        [ErrorDetails("Address out of bounds due to BadWeather", "")]
+        APAddressOutOfBoundsBadWeather = -4014,
+
+        [ErrorDetails("Address out of bounds due to other reason besides Weather", "")]
+        APAddressOutOfBoundsOtherWeather = -4015,
+
+        #endregion
+
+        #region Common Data Provider -5000 - 5999
+
+        [ErrorDetails("The configuration element not found", "")]
+        CDPMissingConfiguration = -5000,
+
+        [ErrorDetails("The Enum Type not found", "")]
+        CDPInvalidEnumType = -5001,
+
+        [ErrorDetails("Item NotFound", "")]
+        CDPItemNotFound = -5002,
+
+        [ErrorDetails("Error parsing configuration value", "")]
+        CDPErrorParsingConfigurationValue = -5003,
+
+        #endregion
+
+        #region Payment -6000 - -6999
+
+        /// <summary>
+        /// There was an internal error
+        /// </summary>
+        [ErrorDetails("There was an internal error in payment execution procedure", "")]
+        PaymentGenericError = -6001,
+
+        /// <summary>
+        /// This error is returned when the customer id passed is not registered in Database
+        /// </summary>
+        [ErrorDetails("This error is returned when the customer id informed is unkown", "")]
+        InvalidCustomerPaymentId = -6002,
+
+        /// <summary>
+        /// The gateway refuse the payment command request
+        /// </summary>
+        [ErrorDetails("The application card payment command had not succeeded", "")]
+        PaymentNotAproved = -6003,
+
+        /// <summary>
+        /// The payment operation could not proceeded due to invalid information passed by the mobile
+        /// </summary>
+        [ErrorDetails("The application receive an invalid order id to process the payment", "")]
+        CustomerInvalidPaymentOrder = -6004,
+
+        /// <summary>
+        /// There was an internal error
+        /// </summary>
+        [ErrorDetails("There was an internal error in revert payment execution procedure", "")]
+        PaymentCouldNotRevert = -6005,
+
+        /// <summary>
+        /// The user cancelled the payment
+        /// </summary>
+        [ErrorDetails("The user cancelled the payment", "")]
+        PaymentCancelledByUser = -6006,
+
+        /// <summary>
+        /// The application count not connect to payment endpoint
+        /// </summary>
+        [ErrorDetails("The application count not connect to payment endpoint", "")]
+        PaymentEndpointNotFound = -6007,
+
+        /// <summary>
+        /// The application can not continue the payment because order errors
+        /// </summary>
+        [ErrorDetails("The application can not continue the payment because order errors", "")]
+        PaymentCanNotContinue = -6008,
+
+        /// <summary>
+        /// This error is returned when occurs an error operating the customer account entered
+        /// </summary>
+        [ErrorDetails("This error is returned when there is an error with the customer account operation", "")]
+        CustomerPaymentMethodError = -6009,
+
+        /// <summary>
+        /// This error is returned when occurs an error to send the order to production
+        /// </summary>
+        [ErrorDetails("This error is returned when occurs an error to send the order to production", "")]
+        CannotSendOrdertoFOE = -6010,
+
+        [ErrorDetails("Contact needed", "")]
+        PaymentErrorContactNeeded = -6011,
+
+        [ErrorDetails("Payment with account not approved", "")]
+        PaymentNotApprovedAccount = -6012,
+
+        [ErrorDetails("Payment with card not approved", "")]
+        PaymentNotApprovedCard = -6013,
+
+        [ErrorDetails("Payment with card not approved due to exceeding PIN retry count", "")]
+        PaymentNotApprovedCard_PINTriesExceeded = -6014,
+
+        [ErrorDetails("Payment not approved due to card expiration", "")]
+        PaymentNotApprovedCardExpired = -6015,
+
+        [ErrorDetails("Payment not approved due to incorrect PIN code", "")]
+        PaymentNotApprovedCardPIN = -6016,
+
+        [ErrorDetails("Payment not approved due to missing contact information", "")]
+        PaymentNotApprovedContactNeeded = -6017,
+
+        [ErrorDetails("Payment not approved due to fraud", "")]
+        PaymentNotApprovedFraud = -6018,
+
+        /// <summary>
+        /// This error is returned when customer payment method is use with a store that does not have such payment
+        /// </summary>
+        [ErrorDetails("This error is returned when customer payment method is use with a store that does not have such payment", "")]
+        PaymentCustomerMethodIsIncompatibleWithStore = -6019,
+
+        /// <summary>
+        /// This warning is returned if the order payments done are partial
+        /// </summary>
+        [ErrorDetails("The total payments done are smaller than order total", "")]
+        OrderNotCompletelyPaid = -6020,
+
+        [ErrorDetails("This error is returned when payment method is use with a store that does not have such payment", "")]
+        PaymentMethodIsIncompatibleWithStore = -6021,
+
+        [ErrorDetails("This error is returned when POS DT is not in Mobile Order Mode", "")]
+        RestaurantNotAcceptingDTOrders = -6022,
+
+        [ErrorDetails("This error is returned when CVV is not informed when the payment schema requires cvv.", "")]
+        PaymentInvalidCVV = -6023,
+
+        /// <summary>
+        /// There was an internal error in query payment status procedure
+        /// </summary>
+        [ErrorDetails("There was an internal error in query payment status procedure", "")]
+        PaymentCouldNotBeQueried = -6024,
+
+        [ErrorDetails("This error is returned when the maximum cards per order is reached ", "")]
+        PaymentMaximumCardsPerOrderReached = -6025,
+
+        [ErrorDetails("This error is returned when the maximum declines per order is reached", "")]
+        PaymentMaximumDeclinesPerOrderReached = -6026,
+
+        [ErrorDetails("This error is returned when the maximum declines per card is reached", "")]
+        PaymentMaximumDeclinesPerCardReached = -6027,
+
+        [ErrorDetails("This error is returned when the CustomerPaymentMethod is not found", "")]
+        CustomerPaymentMethodNotFound = -6028,
+
+        [ErrorDetails("This error is returned when the CustomerPaymentMethod is not a card", "")]
+        CustomerPaymentCardNotFound = -6029,
+
+        /// <summary>
+        /// This error is returned when trying to remove e-Arch card with available balance
+        /// </summary>
+        [ErrorDetails("This error is returned when trying to remove e-Arch card with available balance", "")]
+        RemovingEArchCardsWithBalance = -6030,
+
+        /// <summary>
+        /// This error is returned whenever a PaymentIdentificationCode is expired
+        /// </summary>
+        [ErrorDetails("This error is returned whenever a PaymentIdentificationCode is expired", "")]
+        ExpiredPaymentRandomCode = -6031,
+
+        /// <summary>
+        /// This error is returned whenever the Payment Identification Code was not found
+        /// </summary>
+        [ErrorDetails("This error is returned whenever the Payment Identification Code was not found", "")]
+        InvalidPaymentRandomCode = -6032,
+
+        /// <summary>
+        /// This error is returned whenever the Payment Identification Code was not found
+        /// </summary>
+        [ErrorDetails("This error is returned whenever the Payment Identification Code was not found", "")]
+        PaymentInvalidRandomCode = -6032,
+
+        /// <summary>
+        /// This error is returned when the payment order is not found by the random code
+        /// </summary>
+        [ErrorDetails("This error is returned when the payment order is not found by the random code", "")]
+        PaymentOrderNotFoundByCode = -6033,
+
+        /// <summary>
+        /// This error is returned when the payment order's random code already expired
+        /// </summary>
+        [ErrorDetails("This error is returned when the payment order's random code already expired", "")]
+        PaymentOrderRandomCodeExpired = -6034,
+
+        /// <summary>
+        /// This error is returned when the order payment was already retrieved
+        /// </summary>
+        [ErrorDetails("This error is returned when the order payment was already retrieved", "")]
+        PaymentOrderAlreadyRetrieved = -6035,
+
+        /// <summary>
+        /// This error is returned when the order cannot be converted to the FOE format
+        /// </summary>
+        [ErrorDetails("This error is returned when the order cannot be converted to the FOE format", "")]
+        CannotConvertOrderToFOEFormat = -6036,
+
+        /// <summary>
+        /// This error is returned when the order cannot be found in the saved payment orders
+        /// </summary>
+        [ErrorDetails("This error is returned when the order cannot be found in the saved payment orders", "")]
+        PaymentOrderNotFound = -6037,
+
+        /// <summary>
+        /// This error is returned when the payment order still has a valid randomcode, and the user requested a generation of a new one
+        /// </summary>
+        [ErrorDetails("This error is returned when the payment order still has a valid randomcode, and the user requested a generation of a new one", "")]
+        PaymentOrderRandomCodeStillValid = -6038,
+
+        /// <summary>
+        /// This error is returned when the the user pays an order partially, but it is not allowed by the KIOSK
+        /// </summary>
+        [ErrorDetails("This error is returned when the the user pays an order partially, but it is not allowed by the KIOSK", "")]
+        PartialPaymentIsNotAllowed = -6039,
+
+        /// <summary>
+        /// This error is returned when the all available random codes are already in use
+        /// </summary>
+        [ErrorDetails("This error is returned when the all available random codes are already in use", "")]
+        PaymentOrderOutOfRandomCode = -6040,
+
+        /// <summary>
+        /// This error is returned when the the user tries to merge two card with different payment schema
+        /// </summary>
+        [ErrorDetails("This error is returned when the the user tries to merge two card with different payment schema", "")]
+        IncompatiblePaymentSchemas = -6041,
+
+        /// <summary>
+        /// This error is returned whenever a payment is incompatible with the payment driver
+        /// </summary>
+        [ErrorDetails("This error is returned whenever a payment is incompatible with the payment driver", "")]
+        IncompatiblePayment = -6041,
+
+        /// <summary>
+        /// This error is returned in case of the payment identification code
+        /// read by NP6 is different of the identification code stored for a specific payment method
+        /// </summary>
+        [ErrorDetails("This error is returned in case of the payment identification code read by NP6 is different of the identification code stored for a specific payment method", "")]
+        InvalidPaymentBarcode = -6042,
+        
+        /// <summary>
+        /// This error is returned when the barcode content is invalid
+        /// </summary>
+        [ErrorDetails("This error is returned when the barcode content is invalid.", "")]
+        InvalidBarcodeContent = -6043,
+
+        /// <summary>
+        /// This error is returned when the customer in barcode is different of the payment customer
+        /// </summary>
+        [ErrorDetails("This error is returned when the customer in barcode is different of the payment customer.", "")]
+        InvalidCustomer = -6044,
+
+        /// <summary>
+        /// This error is returned when the customer in barcode is different of the payment customer
+        /// </summary>
+        [ErrorDetails("This error is returned when the customer in barcode is different of the payment customer.", "")]
+        PaymentInvalidCustomer = -6044,
+
+        [ErrorDetails("This error is returned when the body of a response message for payment method registration is empty", "")]
+        PaymentEmptyBodyResponseOnRegistration = -6045,
+
+        [ErrorDetails("This error is returned when the QueryString of a response message for payment method registration is invalid", "")]
+        PaymentInvalidQueryStringOnRegistration = -6046,
+
+        [ErrorDetails("This error is returned when the payment method registration fails", "")]
+        PaymentFailedOnRegistration = -6047,
+
+        /// <summary>
+        /// This error is returned whenever an unknown payment method is given
+        /// </summary>
+        [ErrorDetails("This error is returned whenever an unknown payment method is given", "")]
+        UnknownPaymentMethodOnRegistration = -6048,
+
+        [ErrorDetails("This error is returned when the message could not be signed", "")]
+        PaymentFailedOnMessageSigning = -6049,
+
+        [ErrorDetails("This error is returned when the payment driver returned no answer", "")]
+        PaymentFailedWithNoAnswer = -6050,
+
+        [ErrorDetails("This error is returned when the payment driver charged no amount for the payment", "")]
+        NoBalanceAvailable = -6051,
+
+        [ErrorDetails("This error is returned when the payment charge is not succeeded", "")]
+        PaymentChargeFailed = -6052,
+
+        [ErrorDetails("This error is returned whenever a payment times out", "")]
+        PaymentTimedOut = -6053,
+
+        [ErrorDetails("This error is returned whenever a payment driver custom parameters are incompatible", "")]
+        IncompatibleCustomParameters = -6054,
+
+        [ErrorDetails("This error is returned whenever a queried payment isn't found", "")]
+        PaymentNotFound = -6055,
+
+        [ErrorDetails("This error is returned whenever an order could not be charged entirely", "")]
+        PaymentCouldNotBeChargedEntirely = -6056,
+
+        [ErrorDetails("This error is returned whenever the system tries to execute a payment, that is already in progress.", "")]
+        PaymentAlreadyInProgress = -6057,
+
+        [ErrorDetails("This error is returned whenever the system tries to execute a payment, that has been executed once and the payment failed that time.", "")]
+        PaymentRepetitionAfterFailedRequest = -6058,
+
+        [ErrorDetails("This error is returned whenever the system tries to execute a payment that has already been executed once, but payment reverted due to a FOE error, and the payment failed that time.", "")]
+        PaymentAlreadyReverted = -6059,
+
+        [ErrorDetails("This error is returned when the user tries to add a new payment company which already exists", "")]
+        PaymentCompanyAlreadyExists = -6060,
+
+        [ErrorDetails("This error is returned when the user tries to set a payment company which does not exist", "")]
+        PaymentCompanyDoesNotExist= -6061, 
+
+        [ErrorDetails("This error is returned whenever the system tries to execute a payment that has already been executed once in another Store", "")]
+        PaymentAlreadyPaidAtAnotherStore = -6059,
+
+        [ErrorDetails("This error is returned whenever the system tries to execute a payment that needs to be reverted", "")]
+        PaymentNeedsToBeReverted = -6060,
+
+        [ErrorDetails("This error is returned whenever the system tries to execute a payment with cash", "")]
+        PaymentCashIsNotAllowed = -6061,
+        
+        #endregion
+
+        #region RSDS integration error -7000 to -7999
+
+        /// <summary>
+        /// This error is returned if failed to call the ViewAddressPoint_v3 method in RSDS
+        /// </summary>
+        [ErrorDetails("Failed to call RSDS's - ViewAddressPoint_v3 method.", "")]
+        RSDSViewAddressPointCommunicationError = -7000,
+
+        /// <summary>
+        /// This error is returned if RSDS's call - ViewAddressPoint_v3 response an error
+        /// </summary>
+        [ErrorDetails("RSDS's call - ViewAddressPoint_v3 response an error", "")]
+        RSDSViewAddressPointResponseError = -7001,
+
+ 
+        /// <summary>
+        /// This error is returned if failed to call the GetDeliveryDetails_v8 method in RSDS
+        /// </summary>
+        [ErrorDetails("Failed to call RSDS's - GetDeliveryDetails_v8 method.", "")]
+        RSDSGetDeliveryDetailsCommunicationError = -7002,
+
+        /// <summary>
+        /// This error is returned if RSDS's call - GetDeliveryDetails_v8 response an error
+        /// </summary>
+        [ErrorDetails("RSDS's call - GetDeliveryDetails_v8 response an error", "")]
+        RSDSGetDeliveryDetailsResponseError = -7003,
+
+        /// <summary>
+        /// This error is returned if failed to call the AddOrderTracking method in RSDS
+        /// </summary>
+        [ErrorDetails("Failed to call RSDS's - AddOrderTracking method.", "")]
+        RSDSAddOrderTrackingCommunicationError = -7004,
+
+        /// <summary>
+        /// This error is returned if RSDS's call - AddOrderTracking response an error
+        /// </summary>
+        [ErrorDetails("RSDS's call - AddOrderTracking response an error", "")]
+        RSDSAddOrderTrackingResponseError = -7005,
+
+        /// <summary>
+        /// This error is returned if failed to call the InsertOrderDelivery_v4 method in RSDS
+        /// </summary>
+        [ErrorDetails("Failed to call RSDS's - InsertOrderDelivery_v4 method.", "")]
+        RSDSInsertOrderDeliveryCommunicationError = -7006,
+
+        /// <summary>
+        /// This error is returned if RSDS's call - InsertOrderDelivery_v4 response an error
+        /// </summary>
+        [ErrorDetails("RSDS's call - InsertOrderDelivery_v4 response an error", "")]
+        RSDSInsertOrderDeliveryResponseError = -7007,
+
+        /// <summary>
+        /// This error is returned if failed to call the ViewRiderAvailability_v3 method in RSDS
+        /// </summary>
+        [ErrorDetails("Failed to call RSDS's - ViewRiderAvailability_v3 method.", "")]
+        RSDSViewRiderAvailabilityCommunicationError = -7008,
+
+        /// <summary>
+        /// This error is returned if RSDS's call - ViewRiderAvailability_v3 response an error
+        /// </summary>
+        [ErrorDetails("RSDS's call - ViewRiderAvailability_v3 response an error", "")]
+        RSDSViewRiderAvailabilityResponseError = -7009,
+
+        /// <summary>
+        /// This error is returned if failed to call the AddOrderDispatch_v2 method in RSDS
+        /// </summary>
+        [ErrorDetails("Failed to call RSDS's - AddOrderDispatch_v2 method.", "")]
+        RSDSAddOrderDispatchCommunicationError = -7010,
+
+        /// <summary>
+        /// This error is returned if RSDS's call - AddOrderDispatch_v2 response an error
+        /// </summary>
+        [ErrorDetails("RSDS's call - AddOrderDispatch_v2 response an error", "")]
+        RSDSAddOrderDispatchResponseError = -7011,
+
+        /// <summary>
+        /// This error is returned if failed to call the CancelOrderDispatch method in RSDS
+        /// </summary>
+        [ErrorDetails("Failed to call RSDS's - CancelOrderDispatch method.", "")]
+        RSDSCancelOrderDispatchCommunicationError = -7010,
+
+        /// <summary>
+        /// This error is returned if RSDS's call - CancelOrderDispatch response an error
+        /// </summary>
+        [ErrorDetails("RSDS's call - CancelOrderDispatch response an error", "")]
+        RSDSCancelOrderDispatchResponseError = -7011,
+
+        /// <summary>
+        /// This error is returned if failed to call the GetRouteDirection method in RSDS
+        /// </summary>
+        [ErrorDetails("Failed to call RSDS's - GetRouteDirection method.", "")]
+        RSDSGetRouteDirectionCommunicationError = -7012,
+
+        /// <summary>
+        /// This error is returned if RSDS's call - ViewRouteDirection response an error
+        /// </summary>
+        [ErrorDetails("RSDS's call - ViewRouteDirection response an error", "")]
+        RSDSGetRouteDirectionResponseError = -7013,
+
+        /// <summary>
+        /// This error is returned if failed to call the ViewRouteDirection method in RSDS
+        /// </summary>
+        [ErrorDetails("Failed to call RSDS's - UpdateDeliveryHubStatus method.", "")]
+        RSDSUpdateDeliveryHubStatusCommunicationError = -7014,
+
+        /// <summary>
+        /// This error is returned if RSDS's call - ViewRouteDirection response an error
+        /// </summary>
+        [ErrorDetails("RSDS's call - UpdateDeliveryHubStatus response an error", "")]
+        RSDSUpdateDeliveryHubStatusResponseError = -7015,
+
+        /// <summary>
+        /// This error is returned if failed to call the AssignDeviceToRider method in RSDS
+        /// </summary>
+        [ErrorDetails("Failed to call RSDS's - AssignDeviceToRider method.", "")]
+        RSDSAssignDeviceToRiderCommunicationError = -7016,
+
+        /// <summary>
+        /// This error is returned if RSDS's call - AssignDeviceToRider response an error
+        /// </summary>
+        [ErrorDetails("RSDS's call - AssignDeviceToRider response an error", "")]
+        RSDSAssignDeviceToRiderResponseError = -7017,
+        /// <summary>
+        /// This error is returned if failed to call the UnassignDeviceFromRider method in RSDS
+        /// </summary>
+        [ErrorDetails("Failed to call RSDS's - UnassignDeviceFromRider method.", "")]
+        RSDSUnassignDeviceFromRiderCommunicationError = -7018,
+
+        /// <summary>
+        /// This error is returned if RSDS's call - UnassignDeviceFromRider response an error
+        /// </summary>
+        [ErrorDetails("RSDS's call - UnassignDeviceFromRider response an error", "")]
+        RSDSUnassignDeviceFromRiderResponseError = -7019,
+
+        /// <summary>
+        /// This error is returned if RSDS had an internal error
+        /// </summary>
+        [ErrorDetails("RSDS had an internal error", "")]
+        RSDSInternalError = -7100,
+
+        /// <summary>
+        /// This error is returned if RSDS's call needs nric and it was null
+        /// </summary>
+        [ErrorDetails("RSDS's call needs nric and it was null", "")]
+        RSDSNRICParameterIsNULL = -7101,
+
+        /// <summary>
+        /// This error is returned if RSDS's call needs nric and it was too long
+        /// </summary>
+        [ErrorDetails("RSDS's call needs nric and it  was too long", "")]
+        RSDSNRICParameterLengthExceeded = -7102,
+
+        /// <summary>
+        /// This error is returned if RSDS's call needs Device Serial Number and it was null
+        /// </summary>
+        [ErrorDetails("RSDS's call needs Device Serial Number and it was null", "")]
+        RSDSDeviceNumberParameterIsNULL = -7103,
+
+        /// <summary>
+        /// This error is returned if RSDS's call needs Device Serial Number and it was too long
+        /// </summary>
+        [ErrorDetails("RSDS's call needs Device Serial Number and it  was too long", "")]
+        RSDSDeviceNumberParameterLengthExceeded = -7104,
+
+        /// <summary>
+        /// This error is returned if Rider To Device asssgnment is not allowed
+        /// </summary>
+        [ErrorDetails(" Rider To Device assignment is not allowed", "")]
+        RSDSDeviceAssignmentIsNotAllowed = -7105,
+
+        /// <summary>
+        /// This error is returned if Remove Device to Rider assignment is not allowed
+        /// </summary>
+        [ErrorDetails("Remove Device to Rider assignment is not allowed", "")]
+        RSDSRemoveDeviceAssignmentIsNotAllowed = -7106,
+
+        /// <summary>
+        /// This error is returned if RSDS's call needs OrderID and it was null
+        /// </summary>
+        [ErrorDetails("RSDS's call needs OrderID and it was null", "")]
+        RSDSOrderIDParameterIsNULL = -7107,
+
+        /// <summary>
+        /// This error is returned if RSDS's call needs OrderID and it was too long
+        /// </summary>
+        [ErrorDetails("RSDS's call needs OrderID and it was too long", "")]
+        RSDSOrderIDParameterLengthExceeded = -7108,
+
+        /// <summary>
+        /// This error is returned if RSDS can't find the specified Rider
+        /// </summary>
+        [ErrorDetails("RSDS can't find the specified Rider", "")]
+        RSDSRiderIsNotFound = -7109,
+
+        /// <summary>
+        /// This error is returned if RSDS can't cancel the OrderDispatch.
+        /// </summary>
+        [ErrorDetails("RSDS can't cancel the OrderDispatch", "")]
+        RSDSOrderDispatchIsNotCancelled = -7110,
+
+        /// <summary>
+        /// This error is returned if RSDS's call needs StoreName and it was null
+        /// </summary>
+        [ErrorDetails("RSDS's call needs StoreName and it was null", "")]
+        RSDSStoreNameParameterIsNULL = -7111,
+
+        /// <summary>
+        /// This error is returned if RSDS's call needs StoreName and it was too long
+        /// </summary>
+        [ErrorDetails("RSDS's call needs StoreName and it was too long", "")]
+        RSDSStoreNameParameterLengthExceeded = -7112,
+
+        /// <summary>
+        /// This error is returned if RSDS can't find the Cluster ???
+        /// </summary>
+        [ErrorDetails("RSDS can't find the Store Cluster", "")]
+        RSDSClusterIsNotFound = -7113,
+
+        /// <summary>
+        /// This error is returned if RSDS can't find the Store
+        /// </summary>
+        [ErrorDetails("RSDS can't find the Store", "")]
+        RSDSStoreNameIsNotFound = -7114,
+
+        /// <summary>
+        /// This error is returned if RSDS can't add the OrderDispatch.
+        /// </summary>
+        [ErrorDetails("RSDS can't add the OrderDispatch", "")]
+        RSDSOrderDispatchIsNotAdded = -7115,
+
+        /// <summary>
+        /// This error is returned if Rider is not signed in
+        /// </summary>
+        [ErrorDetails("Rider is not signed in", "")]
+        RSDSRiderIsNotSignedIn = -7116,
+
+        /// <summary>
+        /// This error is returned if RSDS's call needs Progress ID and it was null
+        /// </summary>
+        [ErrorDetails("RSDS's call needs Progress ID and it was null", "")]
+        RSDSProgressIDParameterIsNULL = -7117,
+
+        /// <summary>
+        /// This error is returned if RSDS's call needs Progress ID and it was not integer
+        /// </summary>
+        [ErrorDetails("RSDS's call needs Progress ID and it was not integer", "")]
+        RSDSProgressIDParameterIsNotInt = -7118,
+
+        /// <summary>
+        /// This error is returned if RSDS can't change the Order Progress.
+        /// </summary>
+        [ErrorDetails("RSDS can't change the Order Progress", "")]
+        RSDSOrderProgressIsNotAdded = -7119,
+
+        /// <summary>
+        /// Order amount is not a valid decimal.
+        /// </summary>
+        [ErrorDetails("Order amount is not a valid decimal.", "")]
+        RSDSOrderAmountIsNotAValidDecimal = -7120,
+
+        [ErrorDetails("MinimumNumberOfRider parameter is null.", "")]
+        RSDSMinimumNumberOfRiderIsNull = -7121,
+
+        [ErrorDetails("MinimumNumberOfRider is not an integer.", "")]
+        RSDSMinimumNumberOfRiderIsNotInt = -7122,
+
+        [ErrorDetails("MinimumNumberOfRider is less than or equal to zero.", "")]
+        RSDSMinumumNumberOfRiderIsZero = -7123,
+
+        [ErrorDetails("Address Point ID parameter is null.", "")]
+        RSDSAddressPointIdIsNull = -7124,
+
+        [ErrorDetails("Address Point ID is not an integer.", "")]
+        RSDSAddressPointIdIsNotInt = -7125,
+        [ErrorDetails("Address Point ID is not found.", "")]
+        RSDSAddressPointIdIsNotFound = -7126,
+        [ErrorDetails("Order Type parameter is null.", "")]
+        RSDSOrderTypeIsNull = -7127,
+        [ErrorDetails("Order Type length exceeded.", "")]
+        RSDSOrderTypeLengthExceeded = -7128,
+        [ErrorDetails("Order Type Code is unknown.", "")]
+        RSDSOrderTypeIsUnknown = -7129,
+        [ErrorDetails("Order Amount parameter is null or empty.", "")]
+        RSDSOrderAmountIsNull = -7130,
+        [ErrorDetails("Order Amount length exceeded.", "")]
+        RSDSOrderAmountLengthExceeded = -7131,
+        [ErrorDetails("Invalid Parameter Exception", "")]
+        RSDSDeliveryDateTimeIsInvalid = -7132,
+        [ErrorDetails("DefaultHubName is not correctly entered.", "")]
+        RSDSDefaultHubIsIncorrect = -7133,
+        [ErrorDetails("ClosestHubName is not correctly entered.", "")]
+        RSDSClosestHubIsIncorrect = -7134,
+        [ErrorDetails("FinalHubName is not correctly entered.", "")]
+        RSDSFinalHubIsIncorrect = -7135,
+        [ErrorDetails("Hub Information is not correctly entered.", "")]
+        RSDSHubInfoIsNotCorrect = -7136,
+        [ErrorDetails("Number of riders needed to deliver is already maxed, please increase the number of riders needed.", "")]
+        RSDSNumberOfRidersIsMaxed = -7137,
+        [ErrorDetails("Error: Unknown address due to invalid address search parameters.", "")]
+        RSDSInvalidAddressParameters = -7138,
+        [ErrorDetails("The RSDS can't find a store that accepts order in that region.", "")]
+        RSDSNoStoreFoundThatAcceptsOrder = -7139,
+        [ErrorDetails("RSDS's call - ViewAddressPoint_v4 response: Query Parameter Invalid ", "")]
+        RSDSViewAddressPointQueryParameterInvalid = -7140,
+        [ErrorDetails("RSDS's call - ViewAddressPoint_v4 response: Max address matches count exceeded", "")]
+        RSDSViewAddressPointMaxAddressMatchesCountExceeded = -7141,
+        [ErrorDetails("RSDS's call - ViewAddressPoint_v4 response: None of address matches found", "")]
+        RSDSViewAddressPointNoneOfAddressMathcesFound = -7142,
+        [ErrorDetails("Postal code hasn't been find on the post list", "")]
+        RSDSPostalCodeIsMissingFromThePostList = -7143,
+        [ErrorDetails("RSDS Address Type is not valid", "")]
+        RSDSAddressTypeIsInvalid = -7144,
+
+ 
+ 
+ 
+        #endregion
+
+        #region Offers -8000 to -8999
+        /// <summary>
+        /// There was an internal error (general error)
+        /// </summary>
+        [ErrorDetails("There was an internal error in offers procedure", "")]
+        OffersGenericError = -8001,
+
+        [ErrorDetails("There was an internal error in offers subscription procedure", "")]
+        OffersSubscribeGenericError = -8002,
+
+        [ErrorDetails("There was an internal error in offers Unsubscription procedure", "")]
+        OffersUnsubscribeGenericError = -8003,
+
+        [ErrorDetails("There was an internal error in offers subscription procedure", "")]
+        OffersUserNotFoundError = -8004,
+
+        [ErrorDetails("Missing required Offers subscription fields", "")]
+        OffersMissingRequiredSubscriptionFields = -8005,
+
+        [ErrorDetails("User is not subscribed to Offers", "")]
+        OffersUserNotSubscribed = -8006,
+
+        [ErrorDetails("Invalid subscription reason", "")]
+        OffersInvalidUnsubscribeReason = -8007,
+
+        [ErrorDetails("Customer offer not found", "")]
+        OffersOfferNotFound = -8008,
+
+        [ErrorDetails("There was an internal error while trying to archive an offer", "")]
+        OffersArchiveOfferGenericError = -8009,
+
+        [ErrorDetails("There was an internal error while trying to unarchive an offer", "")]
+        OffersUnarchiveOfferGenericError = -8010,
+
+        [ErrorDetails("There was an internal error while trying to select a set offers for the next purchase", "")]
+        OffersSelectForNextPurchaseOfferGenericError = -8011,
+
+        [ErrorDetails("There is at least one invalid offer FeedbackTypeID sent as a parameter to 'SelectForNextPurchase'", "")]
+        OffersSelectInvalidOfferId = -8012,
+
+        [ErrorDetails("There was an internal error while trying to get an identification code", "")]
+        OffersGetIdentificationCodeGenericError = -8013,
+
+        [ErrorDetails("The Offer being edited is already expired", "")]
+        OfferTryingToGetExpiredOffer = -8014,
+
+        [ErrorDetails("The restaurant where offer is validating is invalid", "")]
+        OffersInvalidRestaurant = -8015,
+
+        [ErrorDetails("The restaurant where offer is validating is invalid", "")]
+        OffersInvalidOfferNotAvailableYet = -8016,
+
+        [ErrorDetails("The current punch is not equal total punch", "")]
+        OffersInvalidCurrentPunch = -8017,
+
+        [ErrorDetails("The Offer Promotion is missing products", "")]
+        OffersPromotionMissingProducts = -8019,
+
+        [ErrorDetails("The Offer Promotion has invalid POD", "")]
+        OffersPromotionInvalidPod = -8020,
+
+        [ErrorDetails("The Offer Promotion has invalid date/time", "")]
+        OffersPromotionInvalidDateTime = -8021,
+
+        [ErrorDetails("The Offer has already been redeemed", "")]
+        OffersOfferAlreadyRedeemed = -8022,
+
+        [ErrorDetails("The new expiration date is greater than the limit", "")]
+        OffersNewExpirationDateInvalid = -8023,
+
+        [ErrorDetails("A mandatory paramater to create or associate a MSA Offers is missing.", "")]
+        OffersAdminMSAMissingParameter = -8024,
+
+        [ErrorDetails("This type of offer cannot have its Expiration Date extended ", "")]
+        OffersNewExpirationDateInvalidType = -8025,
+
+        [ErrorDetails("The Offer the user is trying to set expiration date is not a MSA offer.", "")]
+        OffersNewExpirationOfferTypeInvalid = -8025,
+
+        [ErrorDetails("A mandatory paramater to create or associate a frequency Offers is missing.", "")]
+        OffersAdminFrequencyMissingParameter = -8026,
+
+        [ErrorDetails("Max expiration date is not set.", "")]
+        OffersMaxExpirationDateNotSet = -8027,
+
+        [ErrorDetails("The Order's delivery date does not match the offer's datetime criteria.", "")]
+        OfferCannotBeDelivered = -8028,
+
+        #region OffersAdmin
+
+        [ErrorDetails("There was an internal error in offers admin procedure", "")]
+        OffersAdminGenericError = -8101,
+
+        [ErrorDetails("There was an internal error in offers admin SendNotification procedure", "")]
+        OffersAdminSendNotificationGenericError = -8102,
+
+        [ErrorDetails("There was an internal error in offers admin GetAllPromotions procedure", "")]
+        OffersAdminGetAllPromotionsError = -8103,
+
+        [ErrorDetails("There was an internal error in offers admin DeleteDeviceAssociations procedure", "")]
+        OffersAdminDeleteDeviceAssociationsError = -8104,
+
+        [ErrorDetails("There's no promotion with the requested Promotion Id", "")]
+        OffersAdminPromotionIdNotFound = -8105,
+
+        [ErrorDetails("There was an internal error in offers admin AssociateOffer", "")]
+        OffersAdminAssociateOfferError = -8106,
+
+        [ErrorDetails("There was an internal error in offers admin GetParticipatingRestaurantsModifiedSince procedure", "")]
+        OffersAdminGetParticipatingRestaurantsModifiedSince = -8107,
+
+        [ErrorDetails("This error is returned when there's an invalid random code", "")]
+        OffersAdminInvalidRandomCode = -8108,
+
+        [ErrorDetails("There was an internal error in offers admin GetAllRestaurants", "")]
+        OffersAdminGetAllRestaurantsError = -8109,
+
+        [ErrorDetails("There was an internal error in offers admin GetAllProducts", "")]
+        OffersAdminGetAllProductsError = -8110,
+
+        [ErrorDetails("There was an internal error in offers admin GetAllTemplates", "")]
+        OffersAdminGetAllTemplatesError = -8111,
+
+        [ErrorDetails("NP Sale Package Transmission Success", "")]
+        NPSalePackageTransmissionSuccess = -8112,
+
+        [ErrorDetails("NP Sale Package - Invalid Data Package", "")]
+        NPSalePackageInvalidDataPackage = -8113,
+
+        [ErrorDetails("NP Sale Package - ECP Database Error", "")]
+        NPSalePackageInvalidECPDatabaseError = -8114,
+
+        [ErrorDetails("There is no template with the requested template Id", "")]
+        OffersAdminTemplateIdNotFound = -8115,
+
+        /// <summary>
+        /// success - no error
+        /// </summary>
+        //[ErrorDetails("OffersdAdminError", "")]
+        //OffersdAdminErrorSuccess = -8200,
+
+        [ErrorDetails("A required application parameter (used for sending push notifications) was not found or could not be parsed", "")]
+        OffersNotificationGatewayMissingOrInvalidParameter = -8200,
+
+        /// <summary>
+        /// user/password does not exist or does not match
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorInvalidUserOrPassword = -8201,
+
+        /// <summary>
+        /// session has expired or is unknown
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorInvalidSessionId = -8202,
+
+        /// <summary>
+        /// unknown User ID
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorInvalidUserId = -8203,
+
+        /// <summary>
+        /// unknown Tag ID
+        /// </summary>
+        [ErrorDetails("InvalidTagId", "")]
+        OffersdAdminErrorInvalidTagId = -8204,
+
+        /// <summary>
+        /// unknown Template ID
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorInvalidTemplateId = -8205,
+
+        /// <summary>
+        /// unknown Promotion ID
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorInvalidPromotionId = -8206,
+
+        /// <summary>
+        /// unknown Offer ID
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorInvalidOfferId = -8207,
+
+        /// <summary>
+        /// wrong CAPTCHA answer
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorWrongCaptchaAnswer = -8208,
+
+        /// <summary>
+        /// e-mail was already registered
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorEmailAlreadyRegistered = -8209,
+
+        /// <summary>
+        /// e-mail is not registered
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorEmailNotRegistered = -8210,
+
+        /// <summary>
+        /// access denied (wrong user role)
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorAccessDenied = -8211,
+
+        /// <summary>
+        /// invalid confirmation code
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorInvalidConfirmationCode = -8212,
+
+        /// <summary>
+        /// invalid category id
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorInvalidCategoryId = -8213,
+
+        /// <summary>
+        /// Invalid Offer
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorInvalidOffer = -8214,
+
+        /// <summary>
+        /// Exceeded the limit of Tag Id changes
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorTagIdChangesLimitExceeded = -8215,
+
+        /// <summary>
+        /// Invalid Request
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorInvalidRequest = -8216,
+
+        /// <summary>
+        /// Model validation
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorModelValidation = -8217,
+
+        /// <summary>
+        /// unexpected internal error
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersdAdminErrorUnexpectedInternalError = -8299,
+
+        /// <summary>
+        /// invalid offerTypeName
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersAdminInvalidOfferTypeName = -8300,
+
+        /// <summary>
+        /// Redeemed Failed
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersAdminRedeemedFailed = -8301,
+
+        /// <summary>
+        /// Offer Not Allowed to be associated
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersAdminLocationBasedAssocation = -8302,
+
+        /// <summary>
+        /// Reserved Failed
+        /// </summary>
+        [ErrorDetails("OffersdAdminError", "")]
+        OffersAdminReservedFailed = -8303,
+
+        #endregion
+
+        #endregion
+
+        #region NodeJS -9000 to -9999
+
+        // See ErrorCodesNodeJs.cs
+
+        #endregion
+
+        #region ErrorCodesCassandra -10000 to -11000
+
+        // See CassandraErrorCodes.cs
+
+        #endregion
+
+        #region ErrorCodesRFM -6000000 to -6009999
+
+        // See ErrorCodesRFM.cs
+
+        #endregion
+
+        #region FOE Integration Errors -6010000 to -6010999
+
+        // See ErrorCodesFoe.cs
+
+        #endregion
+
+        #region MobleServiceErrors -11000 to -11999
+
+        /// <summary>
+        /// This error is returned if service name is invalid.
+        /// </summary>
+        [ErrorDetails("Service Name is invalid", "")]
+        InvalidServiceName = -11000,
+
+        /// <summary>
+        /// This error is returned if method name is invalid.
+        /// </summary>
+        [ErrorDetails("Method Name is invalid", "")]
+        InvalidMethodName = -11001,
+
+        /// <summary>
+        /// This error is returned if method name is first level catalog cache is unavailable.
+        /// </summary>
+        [ErrorDetails("First level catalog cache is unavailable", "")]
+        FirstLevelCacheUnavailable = -11002,
+
+        /// <summary>
+        /// This error is returned if EcpConfiguration.Current.MarketConfiguration.Parameters is null.
+        /// </summary>
+        [ErrorDetails("EcpConfiguration.Current.MarketConfiguration.Parameters is null", "")]
+        MarketConfigParamtersIsNull = -11003,
+
+        /// <summary>
+        /// This error is returned if Default store has never been activated.
+        /// </summary>
+        [ErrorDetails("Default store has never been activated.", "")]
+        DefaultStoreHasNeverBeenActivated = -11004,
+
+        /// <summary>
+        /// This error is returned if Requested store has never been activated.
+        /// </summary>
+        [ErrorDetails("Requested store has never been activated.", "")]
+        RequestedStoreHasNeverBeenActivated = -11005,
+
+        #endregion
+
+        #region SecurityManagerErrors -12000 to -12999
+
+        /// <summary>
+        /// This error is returned if there is no security providers in configuration.
+        /// </summary>
+        [ErrorDetails("No security providers found in the current configuration", "")]
+        InvalidSecurityProviders = -12000,
+
+        /// <summary>
+        /// This error is returned if there is no valid X509 was found.
+        /// </summary>
+        [ErrorDetails("No valid X509 certificate found", "")]
+        NoValidX509Found = -12001,
+
+        #endregion
+
+        #region Order Extended Messages -13000 to -13999
+
+        [ErrorDetails("Restaurant does not accept Pickup orders.", "")]
+        PickupNotSupportedForRestaurant = -13000,
+
+        [ErrorDetails("There is no order which belongs to the given OrderDisplayI", "")]
+        InvalidOrderDisplayId = -13001,
+
+        [ErrorDetails("There is no order details data which belongs to the given OFC order ID", "")]
+        OrderDetailsDataNotFound = -13002,
+
+        [ErrorDetails("Restaurant does not accept Delivery orders.", "")]
+        DeliveryNotSupportedForRestaurant = -13003,
+
+        #endregion
+
+        #region Task related -14000 to -14999
+
+        TaskWaitTimedOut = -14000,
+
+        #endregion
+
+        #region ResourceErrors -15000 to -15999
+
+        [ErrorDetails("Publishing a resource failed.", "")]
+        PublishUnapprovedResource = -12000,
+
+        [ErrorDetails("Resource record not found.", "")]
+        ResourceRecordNotFound = -12001,
+
+        #endregion
+
+        #region Accounting Engine -16000 to -16999
+
+        // See ErrorCodesAccounting.cs
+
+        #endregion
+
+        #region Rider Service -17000 to -17999
+        [ErrorDetails("Rider Service couldn't retrive vendor.", "")]
+        VendorNotFound =  -17000,
+
+        [ErrorDetails("Rider Service couldn't create a vendor with an existing name.", "")]
+        VendorAlreadyExists = -17001,
+
+        [ErrorDetails("Rider Service couldn't create a vendor with an invalid e-mail address.", "")]
+        VendorEmailInvalid = -17002,
+
+        [ErrorDetails("Rider Service couldn't create a vendor with long name.", "")]
+        VendorNameTooLong = -17003,
+
+        [ErrorDetails("Rider Service couldn't create a vendor with long phone.", "")]
+        VendorPhoneTooLong = -17004,
+
+        [ErrorDetails("Rider Service couldn't create a vendor with long address.", "")]
+        VendorAddressTooLong = -17005,
+
+        [ErrorDetails("Rider Service couldn't create a vendor with long address.", "")]
+        VendorEmailTooLong = -17006,
+
+        [ErrorDetails("Pos number is invalid.", "")]
+        InvalidPosNumber = -17007,
+
+        [ErrorDetails("There is rider assigned to vendor.", "")]
+        RiderAssignedToVendor = -17008,
+
+        [ErrorDetails("Rider Service couldn't retrive rider.", "")]
+        RiderNotFound = -17010,
+
+        [ErrorDetails("Rider Service couldn't create a rider with an existing login name.", "")]
+        RiderAlreadyExists = -17011,
+
+        [ErrorDetails("Rider Service couldn't get artifact for batch create riders.", "")]
+        InvalidFileCacheKey = -17012,
+
+        [ErrorDetails("Non uniques Rider login name.", "")]
+        NonUniqueLoginName = -17013,
+
+        [ErrorDetails("Rider Service couldn't determine Rider based on login name.", "")]
+        NonDeterminableLoginName = -17014,
+
+        [ErrorDetails("Rider Service couldn't create Rider ", "")]
+        RiderIsNotCreated = -17015,
+
+        [ErrorDetails("Rider Service couldn't update Rider ", "")]
+        RiderIsNotUpdated = -17016,
+
+        [ErrorDetails("Length of Rider login name is Invalid", "")]
+        InvalidRiderLoginNameLength = -17017,
+
+        [ErrorDetails("Rider login name is Invalid", "")]
+        InvalidRiderLoginName = -17018,
+
+        [ErrorDetails("Length of Rider name is Invalid.", "")]
+        InvalidRiderNameLength = -17019,
+
+        [ErrorDetails("Number of page is negative.", "")]
+        NegativePageNumber = -17030,
+
+        [ErrorDetails("Size of page is negative.", "")]
+        NegativePageSize = -17031,
+
+        [ErrorDetails("Rider does not have password.", "")]
+        RiderHasNoPassword = -17039,
+
+        [ErrorDetails("Rider authentication failed.", "")]
+        RiderAutheticationFailed = -17040,
+
+        [ErrorDetails("Rider not found in cache.", "")]
+        RiderNotFoundInCache = -17041,
+
+        [ErrorDetails("Requested rider state is invalid.", "")]
+        InvalidRequestedRiderState = -17042,
+
+        [ErrorDetails("Rider state is invalid.", "")]
+        InvalidRiderState = -17043,
+
+        [ErrorDetails("Rider is created by different user.", "")]
+        RiderCreateByDifferentUser = -17044,
+
+        [ErrorDetails("Rider is already logged in.", "")]
+        RiderAlreadyLoggedInAtLogin = -17045,
+
+        [ErrorDetails("Rider is not logged in.", "")]
+        RiderNotLoggedInAtStatusChange = -17046,
+
+        [ErrorDetails("Rider status is not allowed at return from break.", "")]
+        RiderNotAllowedStatusAtReturnFromBreak = -17047,
+
+        [ErrorDetails("Rider status is not allowed at go on break.", "")]
+        RiderNotAllowedStatusAtGoOnBreak = -17048,
+
+        [ErrorDetails("Rider status is not allowed at log out.", "")]
+        RiderNotAllowedStatusAtLogout = -17049,
+
+        [ErrorDetails("Rider is not authorized to login this store.", "")]
+        RiderNotAuthorizedToLoginStore = -17050,
+
+        [ErrorDetails("The Rider is logged in anotherStore during state change.", "")]
+        RiderLoggedInAnotherStoreOnStateChange = -17051,
+
+ 
+        #endregion Rider Service -17000 -17999
+
+        #region OFC-OFG-OFPG -18000 to -19999
+        RedisWriteOrExpirationUpdateFailed = -18001,
+        RedisConnectionRefused = -18002,
+        ClientEcpVersionNotSupported = -18010,
+        HttpTimeout = -18011,
+        HttpSuccessParseExceptionOnClientSide = -18012,
+        HttpFailureParseExceptionOnClientSide = -18013,
+        //On a http error status, such as 404, the status is substracted from -19000 on OFC side, so caller logic can decide based on CoreCode only
+        HttpErrorBase = -19000,
+        UserProfileDetailDataNotFound = -19500,
+        UserProfileClaimsError = -19501,
+
+        #endregion
+
+        #region StoreStatistics Service -20000 to -20999
+
+        [ErrorDetails("StoreStatistics Service couldn't retrive estimate delivery time.", "")]
+        EdmNotFound = -20000,
+
+        #endregion StoreStatistics Service -20000 -20999
+
+        #region DHS -20000 to -20999
+
+        DHSExceptionWhileGettingOrderKey = -20001,
+
+        DHSExceptionWhileGettingCustomerKey = -20002,
+
+        DHSGetOFCOrderAndCustomerDataIsEmpty = -20003,
+
+        DHSWholeGetFailedByExceptionWhileGettingOrderKey = -20004,
+
+        DHSWholeGetFailedByExceptionWhileGettingCustomerKey = -20005,
+
+        DHSOrderHistoryIsNotSaved = -20006,
+
+        DHSInvalidOrderHistoryFilter = -20007,
+
+        DHSInvalidBusinessDateFormat = -20008,
+
+        #endregion
+
+        #region DOSS -21000 to -21999
+
+        DOSSOrderDoesNotExist = -21001,
+
+        DOSSInvalidStateChange = -21002,
+
+        DOSSStateIsAlreadySet = -21003,  
+      
+        DOSSSaveStateChangeError = -21004,
+
+        DOSSInvalidOrderStateForOnHold = -21005,
+
+        DOSSOrderIsNotOnHold = -21006,
+
+        DOSSInvalidOrderStateForRiderAssignment = -21007,
+
+        DOSSAssignedRidersAreEmpty = -21008,
+
+        DOSSOrderIsFaxed = -21009,
+
+        DOSSStateChangeIsInProgress = -21010,
+
+        DOSSMissingTimeSeqsListIsEmpty = -21011,
+
+        DOSSSaveSuspendedMessageError = -21012,
+
+        DOSSChangeIsNotFoundInCassandra = -21013,
+
+        DOSSStateChangeIsNotAllowedWithoutRiderAssignment = -21014,
+
+        DOSSInvalidOrderTrackingCriteria = -21015,
+
+        #endregion
+        
+        #region SSS -22000 to -22999
+
+        SAOInformationNotExistsForStore = -22001,
+
+        StartAcceptingOrdersFailed = -22002,
+
+        StopAcceptingOrdersFailed = -22003,
+
+        StoreStatusChangeOnStopAcceptingOrdersChangeFailed = -22004,
+
+        ResolveExceptionalStoreStatusSentStatusDoesNotMatch = -22005,
+
+        #endregion
+
+        #region UPS -23000 to -23999
+
+        UPSInvalidDisplaySettingsJson = -23001,
+
+        UPSApplicableDisplaySettingIsNotFound = -23002,
+
+        #endregion
+
+        #region Restaurant Service -24000 to -24999
+
+        NoStoreAvailable = -24001,
+
+        DefaultStorePropertiesForHashNotFound = -24002,
+
+        [ErrorDetails("Restaurant does not accept Delivery orders at the moment.", "")]
+        StoreIsNotAcceptingOrders = -24003,
+
+        #endregion
+
+        #region Layout related -25000 to -25999
+
+        LayoutForHashNotFound = -25001,
+
+        #endregion
+
+        #region UserProfile service related  -26000 to -26999
+
+        ApplicationRightsError = -26001,
+
+        #endregion
+
+        #region STS service related  -27000 to -27999
+        LDAPSeachError = -27001,
+        #endregion
+
+ 
+        #region Upgrade Related Errors -27500 -27999
+
+        [ErrorDetails("There is already an upgrade in progress.", "")]
+        UpgradeAlreadyInProgress = -27500,
+
+        [ErrorDetails("There is no upgrade currently in progress.", "")]
+        NoUpgradeCurrentlyInProgress = -27501,
+
+        #endregion
+
+        #region Middleware -28000 to -28999
+            #region Common middleware errors -28000 to -28099
+            MiddlewareGenericError = -28000,
+
+            MiddlewareNotFound = -28001,
+
+            MiddlewareUrlNotConfigured = -28002,
+
+            MiddlewareInvalidHttpUrl = -28003,
+
+            MiddlewareResponseIsNull = -28004,
+            
+            /// <summary>
+            /// This error happens only if the request was successful (HTTP 200) and the response was empty.
+            /// </summary>
+            MiddlewareResponseIsEmpty = -28005,
+            #endregion
+
+            #region CIM middleware errors -28100 to -28199
+
+            #endregion
+
+            #region Loyalty middleware errors -28200 to -28299
+            LoyaltyMiddlewareGenericError = -28200,
+
+            #endregion
+        #endregion
+
+        #region Loyalty service errors -29000 to -29100
+            LoyaltyMembershipNumbersCannotBeMerged = -29000,
+
+            CustomerIsNotOptedInForLoyalty = -29001,
+            #endregion
+
+        #region Extended Validation Errors -100000  -200000
+            [ErrorDetails("Invalid Sequence Number.", "")]
+        InvalidSequenceNumber = -100000,
+
+        #endregion
+
+        #region social login graph api error codes, see at https://developers.facebook.com/docs/graph-api/using-graph-api#errors
+        //These error codes are obsolete, -2105 code is returned instead by MobileGateway the same way as 2.7.x
+        //SocialLoginGraphAPIAuthenticationErrorCodeRangeStart = -10000000, //Minus ten million. Graph api Authentication error subcodes (such as: 458, 459, 460, 463, 464, 467) are susbtracted from this
+        //SocialLoginGraphAPIErrorCodeRangeStart = -20000000, //Minus twenty million. Graph error codes (such as: 102, 1, 2, 4, 17, 10, 200-299, 341, 506, 1609005) are susbtracted from this
+        #endregion
+
+        #region Internal Error Codes < -1000000000 - for internal purposes only
+        
+        [ErrorDetails("Execution timed out", "")]
+        ExecutionTimeout = -1000001234,
+        
+        #endregion
+    }
+}
